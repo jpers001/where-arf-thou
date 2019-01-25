@@ -1,4 +1,4 @@
-package com.example.shayne.wherearfthou;
+package edu.odu.cs.air411.wherearfthou;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.shayne.wherearfthou;
+package edu.odu.cs.air411.wherearfthou;
 
 import org.junit.Test;
 
