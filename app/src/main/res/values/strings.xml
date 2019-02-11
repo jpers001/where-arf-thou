@@ -3,4 +3,5 @@
     <string name="view_report_map">View Report Map</string>
     <string name="create_new_lost_report">Create new lost report</string>
     <string name="create_new_found_report">Create new found report</string>
+    <string name="title_activity_2">Found Report</string>
 </resources>
