@@ -10,13 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity2"
-            android:label="@string/title_activity_2"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.odu.cs.air411.wherearfthou.MainActivity" />
-        </activity>
+            android:name=".ReportMap"
+            android:label="@string/title_activity_report_map"></activity>
+        <activity
+            android:name=".FoundReportActivity"
+            android:label="@string/title_activity_found_report" />
+        <activity
+            android:name=".LostReportActivity"
+            android:label="@string/title_activity_lost_report" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +28,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDUFPScBXrB2ko3SE8DHRIKUU9TsIJNZy8"/>
+            android:value="AIzaSyDUFPScBXrB2ko3SE8DHRIKUU9TsIJNZy8" />
     </application>
 
 </manifest>

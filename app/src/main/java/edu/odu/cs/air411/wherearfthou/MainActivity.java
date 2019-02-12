@@ -9,25 +9,59 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     private Button button;
+    private Button button2;
+    private Button button3;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.button);
+        button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                openActivity2();
+                openFoundReportActivity();
+            }
+
+        });
+
+        button2 = findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                openLostReportActivity();
             }
         });
+
+        button3 = findViewById(R.id.map);
+        button3.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                openReportMapActivity();
+            }
+
+        });
     }
-    public void openActivity2()
+    private void openFoundReportActivity()
     {
-        Intent intent = new Intent(this, Activity2.class);
+        Intent intent = new Intent(MainActivity.this, FoundReportActivity.class);
+        startActivity(intent);
+    }
+    private void openLostReportActivity()
+    {
+        Intent intent = new Intent(MainActivity.this, LostReportActivity.class);
+        startActivity(intent);
+    }
+    private void openReportMapActivity()
+    {
+        Intent intent = new Intent(MainActivity.this, LostReportActivity.class);
         startActivity(intent);
     }
 }
