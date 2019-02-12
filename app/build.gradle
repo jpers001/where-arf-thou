@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.shayne.wherearfthou"
+        applicationId "edu.odu.cs.air411.wherearfthou"
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
