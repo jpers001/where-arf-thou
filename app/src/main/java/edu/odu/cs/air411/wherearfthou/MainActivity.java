@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void openReportMapActivity()
     {
-        Intent intent = new Intent(MainActivity.this, LostReportActivity.class);
+        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
         startActivity(intent);
     }
 }
