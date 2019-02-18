@@ -1,10 +1,13 @@
 package edu.odu.cs.air411.wherearfthou;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -19,8 +22,20 @@ public class TakePhotoActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final int MY_REQUEST_INT =0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_photo); /** <<<< should be .main? */
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) !=PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=PackageManager.PERMISSION_GRANTED)
+        {
+            //get camera permission
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            {
+                requestPermissions(new String [] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_REQUEST_INT);
+            }
+        } //end if permission
+
 
         if(!getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_CAMERA))
