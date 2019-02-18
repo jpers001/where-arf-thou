@@ -86,27 +86,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/waticon" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="650dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="textPersonName"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="224dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/colorAccent"
+        android:backgroundTintMode="add"
         android:text="@string/wat_title"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.532"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor"
-        tools:targetApi="o"
+        app:layout_constraintVertical_bias="0.071"
+        tools:backgroundTint="@color/colorAccent"
         tools:text="Where Arf Thou?" />
 
 
