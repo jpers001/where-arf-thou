@@ -11,4 +11,6 @@
     <string name="report_map">Report Map</string>
     <string name="found_report">Found Report</string>
     <string name="title_activity_maps">Map</string>
+    <string name="wat_icon">Where Arf Thou Icon</string>
+    <string name="wat_title">Where Arf Thou Title</string>
 </resources>
