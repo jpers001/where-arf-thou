@@ -2,8 +2,9 @@ package edu.odu.cs.air411.wherearfthou;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 
-public class LostReportActivity extends Activity {
+public class LostReportActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
