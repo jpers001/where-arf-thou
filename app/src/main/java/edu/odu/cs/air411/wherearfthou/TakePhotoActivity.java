@@ -39,6 +39,8 @@ public class TakePhotoActivity extends Activity {
             else
             {
                 camera = Camera.open(cameraId);
+                camera.startPreview();
+                camera.takePicture(null, null, new PhotoHandler(getApplicationContext()));
             }
         }
     } //end onCreate
