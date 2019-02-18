@@ -4,8 +4,8 @@
     <string name="create_new_lost_report">Create new lost report</string>
     <string name="create_new_found_report">Create new found report</string>
     <string name="title_activity_2">Found Report</string>
-    <string name="title_activity_lost_report">LostReportActivity</string>
-    <string name="title_activity_found_report">FoundReportActivity</string>
+    <string name="title_activity_lost_report">Create New Lost Report</string>
+    <string name="title_activity_found_report">Create New Found Report</string>
     <string name="title_activity_report_map">ReportMap</string>
     <string name="lost_report">Lost Report</string>
     <string name="report_map">Report Map</string>
