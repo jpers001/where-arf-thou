@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/mock_doggy">
+    android:background="@drawable/mock_doggy"
+    tools:context=".MainActivity">
 
     <Button
         android:id="@+id/map"
         android:layout_width="224dp"
         android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="99dp"
         android:layout_marginTop="529dp"
         android:layout_marginEnd="88dp"
@@ -22,6 +19,7 @@
         android:backgroundTint="@color/colorAccent"
         android:text="@string/view_report_map"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,10 +28,6 @@
         android:id="@+id/button2"
         android:layout_width="151dp"
         android:layout_height="64dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="235dp"
         android:layout_marginTop="442dp"
         android:layout_marginEnd="25dp"
@@ -41,6 +35,7 @@
         android:backgroundTint="@color/colorAccent"
         android:text="@string/create_new_lost_report"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,10 +44,6 @@
         android:id="@+id/button"
         android:layout_width="151dp"
         android:layout_height="64dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="32dp"
         android:layout_marginTop="442dp"
         android:layout_marginEnd="228dp"
@@ -60,6 +51,7 @@
         android:backgroundTint="@color/colorAccent"
         android:text="@string/create_new_found_report"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -68,25 +60,21 @@
         android:id="@+id/imageView"
         android:layout_width="96dp"
         android:layout_height="102dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="300dp"
         android:layout_marginBottom="600dp"
         android:contentDescription="@string/wat_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/waticon" />
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="118dp"
         android:layout_marginTop="37dp"
         android:layout_marginEnd="80dp"
@@ -98,9 +86,13 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        tools:targetApi="o"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="LabelFor"
+        tools:targetApi="o"
         tools:text="Where Arf Thou?" />
 
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
