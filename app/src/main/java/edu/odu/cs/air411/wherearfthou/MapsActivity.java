@@ -20,8 +20,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,10 +59,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         final int MY_REQUEST_INT;
         MY_REQUEST_INT = 177;
 
-        // Add a marker in Sydney and move the camera
-        //LatLng odu = new LatLng(36.887392, -76.303731);
-        //mMap.addMarker(new MarkerOptions().position(odu).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(odu));
+        LatLng lostPetMarker = new LatLng(36.887014, -76.302157);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -83,10 +82,36 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             double lat = location.getLatitude();
             double lng = location.getLongitude();
             LatLng currLocation = new LatLng(lat, lng);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currLocation, 15));
+            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currLocation, 15));
 
         }
 
+
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.setMinZoomPreference(15);
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(lostPetMarker)
+                .title("Lost Pet Sighting")
+                .snippet("Near 48th Street and Hampton Blvd")
+                //.icon(BitmapDescriptorFactory.defaultMarker( BitmapDescriptorFactory.HUE_BLUE));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.dog_icon));
+        InfoWindowData info = new InfoWindowData();
+        info.setImage("lost_dog");
+        info.setDescription("Description: Saw this white dog roaming with no collar");
+        info.setTags("Tags: white, dog, small, no collar");
+        //info.setContactInfo("Contact me if you have any info at: 123-456-7890");
+
+        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
+        mMap.setInfoWindowAdapter(customInfoWindow);
+
+        Marker m = mMap.addMarker(markerOptions);
+        m.setTag(info);
+        //m.showInfoWindow();
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(lostPetMarker));
+
+        
     }
 
 }
