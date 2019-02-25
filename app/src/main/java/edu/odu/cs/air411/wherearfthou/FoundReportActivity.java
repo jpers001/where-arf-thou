@@ -12,42 +12,7 @@ import java.util.ArrayList;
 
 public class FoundReportActivity extends AppCompatActivity {
 
-    private String description;
-    private String location;
-    private String contact;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    FoundReportActivity(String description, String location, String contact){
-        this.description = description;
-        this.location = location;
-        this.contact = contact;
-    }
-
-    public ArrayList<FoundReportActivity> report = new ArrayList<>();
-
+    public ArrayList<ReportData> report = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +28,7 @@ public class FoundReportActivity extends AppCompatActivity {
         });
     }
 
-    public void submitForm(ArrayList<FoundReportActivity> report){
+    public void submitForm(ArrayList<ReportData> report){
         Intent submit = new Intent();
 
         EditText descriptEditText = findViewById(R.id.descriptEditText);
@@ -75,7 +40,7 @@ public class FoundReportActivity extends AppCompatActivity {
         EditText contactEditText = findViewById(R.id.contactEditText);
         String contact = contactEditText.getText().toString();
 
-        FoundReportActivity entry = new FoundReportActivity(description, location, contact);
+        ReportData entry = new ReportData(description, location, contact);
         report.add(entry);
     }
 
