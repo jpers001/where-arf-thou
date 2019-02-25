@@ -33,4 +33,6 @@
     <string name="content_description_photo_add_lost">Take a photo or add an image</string>
     <string name="description_text">Description:</string>
     <string name="tag_info_text">Tag:</string>
+    <string name="text_confirm">The following report information has been submitted:</string>
+    <string name="button_ok">OK</string>
 </resources>

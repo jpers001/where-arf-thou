@@ -6,12 +6,13 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-    <uses-feature android:name="android.hardware.Camera"
-        android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.Camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 
     <application
         android:allowBackup="true"
@@ -20,6 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ReportConfirmationActivity"></activity>
         <!--
         <activity android:name=".TakePhotoActivity">
             <intent-filter>
@@ -36,7 +38,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity android:name=".MainActivity">
@@ -46,18 +48,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ReportMap"
             android:label="@string/title_activity_report_map" />
         <activity
             android:name=".FoundReportActivity"
             android:label="@string/title_activity_found_report"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".LostReportActivity"
             android:label="@string/title_activity_lost_report"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -66,12 +67,11 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:parentActivityName=".MainActivity"/>
-
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".TakePhotoActivity"
             android:label="@string/get_image"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

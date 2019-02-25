@@ -39,7 +39,7 @@ public class FoundReportActivity extends AppCompatActivity {
     }
 
     public void submitForm(ArrayList<ReportData> report){
-        Intent submit = new Intent(FoundReportActivity.this, MainActivity.class);
+        Intent submit = new Intent(FoundReportActivity.this, ReportConfirmationActivity.class);
 
         EditText descriptEditText = findViewById(R.id.descriptEditText);
         String description = descriptEditText.getText().toString();
@@ -52,6 +52,8 @@ public class FoundReportActivity extends AppCompatActivity {
 
         ReportData entry = new ReportData(description, location, contact, true);
         report.add(entry);
+
+        submit.putExtra("entry", entry);
 
         startActivity(submit);
     }

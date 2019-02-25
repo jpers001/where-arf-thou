@@ -41,7 +41,7 @@ public class LostReportActivity extends AppCompatActivity {
 
 
     public void submitForm(ArrayList<ReportData> report){
-        Intent submit = new Intent(LostReportActivity.this, MainActivity.class);
+        Intent submit = new Intent(LostReportActivity.this, ReportConfirmationActivity.class);
 
         EditText nameEditText = findViewById(R.id.editText);
         String name = nameEditText.getText().toString();
@@ -57,6 +57,8 @@ public class LostReportActivity extends AppCompatActivity {
 
         ReportData entry = new ReportData(name, description, lastSeen, contact, false);
         report.add(entry);
+
+        submit.putExtra("entry", entry);
 
         startActivity(submit);
     }
