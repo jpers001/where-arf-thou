@@ -11,8 +11,8 @@
 
     <Button
         android:id="@+id/map"
-        android:layout_width="224dp"
-        android:layout_height="60dp"
+        android:layout_width="225dp"
+        android:layout_height="65dp"
         android:layout_marginStart="99dp"
         android:layout_marginTop="529dp"
         android:layout_marginEnd="88dp"
@@ -27,8 +27,8 @@
 
     <Button
         android:id="@+id/captureFront"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="65dp"
         android:layout_centerInParent="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -40,12 +40,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="151dp"
-        android:layout_height="64dp"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
         android:layout_marginStart="235dp"
         android:layout_marginTop="442dp"
         android:layout_marginEnd="25dp"
@@ -60,8 +61,8 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="151dp"
-        android:layout_height="64dp"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="442dp"
         android:layout_marginEnd="228dp"
