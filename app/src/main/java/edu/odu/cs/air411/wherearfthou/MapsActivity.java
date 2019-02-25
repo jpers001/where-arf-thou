@@ -71,9 +71,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
             Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-            double lat = location.getLatitude();
-            double lng = location.getLongitude();
-            LatLng currLocation = new LatLng(lat, lng);
+            //double lat = location.getLatitude();
+            //double lng = location.getLongitude();
+            //LatLng currLocation = new LatLng(lat, lng);
             //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currLocation, 15));
 
         }
