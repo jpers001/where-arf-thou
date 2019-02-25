@@ -1,6 +1,8 @@
 package edu.odu.cs.air411.wherearfthou;
 
-public class ReportData {
+import java.io.Serializable;
+
+public class ReportData implements Serializable {
 
     private String name;
     private String description;
