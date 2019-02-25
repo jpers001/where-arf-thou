@@ -9,11 +9,11 @@ import android.widget.TextView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
-public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter {
+public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
 
     private Context context;
 
-    public CustomInfoWindowGoogleMap(Context ctx){
+    public CustomInfoWindow(Context ctx){
         context = ctx;
     }
 
