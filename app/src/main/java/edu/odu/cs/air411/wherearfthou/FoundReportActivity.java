@@ -50,7 +50,7 @@ public class FoundReportActivity extends AppCompatActivity {
         EditText contactEditText = findViewById(R.id.contactEditText);
         String contact = contactEditText.getText().toString();
 
-        ReportData entry = new ReportData(description, location, contact);
+        ReportData entry = new ReportData(description, location, contact, true);
         report.add(entry);
 
         startActivity(submit);
