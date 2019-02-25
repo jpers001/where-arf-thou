@@ -13,7 +13,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="get_image">Get image</string>
     <string name="wat_icon">Where Arf Thou Icon</string>
-    <string name="wat_title">Where Arf Thou Title</string>
+    <string name="wat_title">Where Arf Thou?</string>
     <string name="content_description_photo_add_found">Take a photo or add an image.</string>
     <string name="edit_found_description">Tap to enter a description...</string>
     <string name="edit_location">Tap GPS icon or enter manual location...</string>
