@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -26,10 +27,19 @@ public class FoundReportActivity extends AppCompatActivity {
                 submitForm(report);
             }
         });
+
+        ImageButton addPhotoImgBtn = findViewById(R.id.addPhotoImgBtn);
+        addPhotoImgBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent openTakePhotoActivity = new Intent(FoundReportActivity.this, TakePhotoActivity.class);
+                startActivity(openTakePhotoActivity);
+            }
+        });
     }
 
     public void submitForm(ArrayList<ReportData> report){
-        Intent submit = new Intent();
+        Intent submit = new Intent(FoundReportActivity.this, MainActivity.class);
 
         EditText descriptEditText = findViewById(R.id.descriptEditText);
         String description = descriptEditText.getText().toString();
@@ -42,6 +52,8 @@ public class FoundReportActivity extends AppCompatActivity {
 
         ReportData entry = new ReportData(description, location, contact);
         report.add(entry);
+
+        startActivity(submit);
     }
 
 }
