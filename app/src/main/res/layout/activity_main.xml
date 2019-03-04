@@ -8,7 +8,6 @@
     android:background="@drawable/mock_doggy"
     tools:context=".MainActivity">
 
-
     <Button
         android:id="@+id/map"
         android:layout_width="225dp"
@@ -82,13 +81,15 @@
         android:layout_width="96dp"
         android:layout_height="102dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="300dp"
         android:layout_marginBottom="600dp"
         android:contentDescription="@string/wat_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias=".3"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/waticon" />
 

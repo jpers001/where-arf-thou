@@ -41,7 +41,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,15 +51,18 @@
         </activity>
         <activity
             android:name=".ReportMap"
-            android:label="@string/title_activity_report_map" />
+            android:label="@string/title_activity_report_map"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".FoundReportActivity"
             android:label="@string/title_activity_found_report"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".LostReportActivity"
             android:label="@string/title_activity_lost_report"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -67,11 +71,14 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".TakePhotoActivity"
             android:label="@string/get_image"
             android:parentActivityName=".MainActivity" />
+
+
     </application>
 
 </manifest>
