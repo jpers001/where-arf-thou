@@ -88,17 +88,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .snippet("Near 48th Street and Hampton Blvd")
                 //.icon(BitmapDescriptorFactory.defaultMarker( BitmapDescriptorFactory.HUE_BLUE));
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.dog_icon));
-        InfoWindowData info = new InfoWindowData();
-        info.setImage("lost_dog");
-        info.setDescription("Description: Saw this white dog roaming with no collar");
-        info.setTags("Tags: white, dog, small, no collar");
+        ReportData report = new ReportData();
+        report.setImage("lost_dog");
+        report.setDescription("Description: Saw this white dog roaming with no collar");
+        report.setTags("Tags: white, dog, small, no collar");
         //info.setContactInfo("Contact me if you have any info at: 123-456-7890");
 
         CustomInfoWindow customInfoWindow = new CustomInfoWindow(this);
         mMap.setInfoWindowAdapter(customInfoWindow);
 
         Marker m = mMap.addMarker(markerOptions);
-        m.setTag(info);
+        m.setTag(report);
         //m.showInfoWindow();
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(lostPetMarker));
