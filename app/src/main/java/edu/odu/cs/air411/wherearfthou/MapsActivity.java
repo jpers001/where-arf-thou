@@ -20,6 +20,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -90,8 +93,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.dog_icon));
         ReportData report = new ReportData();
         report.setImage("lost_dog");
-        report.setDescription("Description: Saw this white dog roaming with no collar");
-        report.setTags("Tags: white, dog, small, no collar");
+        report.setDescription("Saw this white dog roaming with no collar");
+
+        ArrayList<String> tagSample = new ArrayList<String>(Arrays.asList("white", "dog", "small", "no collar"));
+        report.setTags(tagSample);
         //info.setContactInfo("Contact me if you have any info at: 123-456-7890");
 
         CustomInfoWindow customInfoWindow = new CustomInfoWindow(this);
