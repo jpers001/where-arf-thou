@@ -38,15 +38,15 @@ public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
         name_tv.setText(marker.getTitle());
         details_tv.setText(marker.getSnippet());
 
-        InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
+        ReportData reportWindowData = (ReportData) marker.getTag();
 
-        int imageId = context.getResources().getIdentifier(infoWindowData.getImage().toLowerCase(),
+        int imageId = context.getResources().getIdentifier(reportWindowData.getImage().toLowerCase(),
                 "drawable", context.getPackageName());
         img.setImageResource(imageId);
 
-        description_tv.setText(infoWindowData.getDescription());
-        tags_tv.setText(infoWindowData.getTags());
-        contactInfo_tv.setText(infoWindowData.getContactInfo());
+        description_tv.setText(reportWindowData.getDescription());
+        tags_tv.setText(reportWindowData.getTags());
+        contactInfo_tv.setText(reportWindowData.getContact());
 
         return view;
     }

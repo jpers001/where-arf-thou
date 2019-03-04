@@ -4,10 +4,13 @@ import java.io.Serializable;
 
 public class ReportData implements Serializable {
 
+    private String image;
     private String name;
     private String description;
-    private String location;
+    private String location; ///might need two strings/variables, one for latitude and one for longitude
     private String contact;
+    private String reportDate;
+    private String tags;
     // true = found report, false = lost report
     private boolean isFound;
 
@@ -74,5 +77,29 @@ public class ReportData implements Serializable {
         this.location = location;
         this.contact = contact;
         this.isFound = isFound;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getReportDate() {
+        return reportDate;
+    }
+
+    public void setReportDate(String reportDate) {
+        this.reportDate = reportDate;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 }
