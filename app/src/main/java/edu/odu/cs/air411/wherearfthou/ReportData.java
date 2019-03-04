@@ -8,6 +8,8 @@ public class ReportData implements Serializable {
     private String name;
     private String description;
     private String location; ///might need two strings/variables, one for latitude and one for longitude
+    private double latitude;
+    private double longitude;
     private String contact;
     private String reportDate;
     private String tags;
@@ -39,6 +41,22 @@ public class ReportData implements Serializable {
         this.location = location;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
     public String getContact() {
         return contact;
     }
@@ -60,6 +78,8 @@ public class ReportData implements Serializable {
         name = "N/A";
         description = "N/A";
         location = "N/A";
+        latitude = 0.00;
+        longitude = 0.00;
         contact = "555-555-5555";
     }
 
@@ -67,6 +87,8 @@ public class ReportData implements Serializable {
         this.name = "N/A";
         this.description = description;
         this.location = location;
+        this.latitude = 0.00;
+        this.longitude = 0.00;
         this.contact = contact;
         this.isFound = isFound;
     }
@@ -75,6 +97,8 @@ public class ReportData implements Serializable {
         this.name = name;
         this.description = description;
         this.location = location;
+        this.latitude = 0.00;
+        this.longitude = 0.00;
         this.contact = contact;
         this.isFound = isFound;
     }
