@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
+import java.util.ArrayList;
+
 public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
 
     private Context context;
@@ -44,8 +46,21 @@ public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
                 "drawable", context.getPackageName());
         img.setImageResource(imageId);
 
-        description_tv.setText(reportWindowData.getDescription());
-        tags_tv.setText(reportWindowData.getTags());
+        description_tv.setText("Description: " + reportWindowData.getDescription());
+
+        ArrayList<String> arrList = reportWindowData.getTags();
+        String arrString = "Tags: ";
+
+        for(int i = 0; i < arrList.size(); i++){
+            if(i == arrList.size() - 1){
+                arrString += arrList.get(i);
+            }
+            else{
+                arrString += arrList.get(i) + ", ";
+            }
+        }
+
+        tags_tv.setText(arrString);
         contactInfo_tv.setText(reportWindowData.getContact());
 
         return view;

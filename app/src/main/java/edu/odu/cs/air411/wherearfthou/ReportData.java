@@ -1,6 +1,7 @@
 package edu.odu.cs.air411.wherearfthou;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ReportData implements Serializable {
 
@@ -12,7 +13,8 @@ public class ReportData implements Serializable {
     private double longitude;
     private String contact;
     private String reportDate;
-    private String tags;
+    /*private String tags;*/
+    private ArrayList<String> tags = new ArrayList<>();
     // true = found report, false = lost report
     private boolean isFound;
 
@@ -119,11 +121,15 @@ public class ReportData implements Serializable {
         this.reportDate = reportDate;
     }
 
-    public String getTags() {
+    public ArrayList<String> getTags() {
         return tags;
     }
 
-    public void setTags(String tags) {
+    public void setTags(ArrayList<String> tags) {
         this.tags = tags;
+    }
+
+    public void addTag(String tag){
+        this.tags.add(tag);
     }
 }
