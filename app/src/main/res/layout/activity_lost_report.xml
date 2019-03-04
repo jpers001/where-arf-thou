@@ -262,4 +262,19 @@
         app:layout_constraintVertical_bias="1.0"
         tools:text="SUBMIT" />
 
+
+    <ImageView
+        android:id="@+id/imageFromCamera"
+        android:layout_width="136dp"
+        android:layout_height="122dp"
+        android:layout_marginStart="137dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginBottom="588dp"
+        android:contentDescription="@string/wat_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

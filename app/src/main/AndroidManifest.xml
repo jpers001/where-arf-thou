@@ -71,8 +71,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".TakePhotoActivity"
             android:label="@string/get_image"
