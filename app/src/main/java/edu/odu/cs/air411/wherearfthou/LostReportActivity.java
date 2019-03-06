@@ -3,6 +3,7 @@ package edu.odu.cs.air411.wherearfthou;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 public class LostReportActivity extends AppCompatActivity {
 
-
+    public static final int IMAGE_REQ = 997;
     public ArrayList<ReportData> report = new ArrayList<>();
 
     @Override
@@ -35,19 +36,20 @@ public class LostReportActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openTakePhotoActivity = new Intent(LostReportActivity.this, TakePhotoActivity.class);
-                startActivity(openTakePhotoActivity);
+                startActivityForResult(openTakePhotoActivity, IMAGE_REQ);
 
             }
 
         });
 
-        ImageView imageView = findViewById(R.id.imageFromCamera);
-        imageView.setImageURI(Uri.parse(TakePhotoActivity.imageFilePath));
-
-
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ImageView imageView = findViewById(R.id.imageFromCamera);
+        imageView.setImageURI(Uri.parse(TakePhotoActivity.imageFilePath));
+    }
 
     public void submitForm(ArrayList<ReportData> report){
         Intent submit = new Intent(LostReportActivity.this, ReportConfirmationActivity.class);
