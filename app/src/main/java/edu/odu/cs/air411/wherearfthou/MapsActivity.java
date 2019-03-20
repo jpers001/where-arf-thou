@@ -58,38 +58,87 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
         final int MY_REQUEST_INT;
         MY_REQUEST_INT = 177;
-
         LatLng lostPetMarker = new LatLng(36.887014, -76.302157);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-
             //Code if location permissions aren't granted (yet?):
-
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, MY_REQUEST_INT);
             }
-
             return;
-        }else{
+        } else {
             //Code if permission is granted:
             //Location currentLocation = LocationServices.FusedLocationApi.getLastLocation;
             mMap.setMyLocationEnabled(true);
-
             LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
             Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-            //double lat = location.getLatitude();
-            //double lng = location.getLongitude();
-            //LatLng currLocation = new LatLng(lat, lng);
-            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currLocation, 15));
-
         }
 
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setMinZoomPreference(15);
 
+        CreateSampleMarker(lostPetMarker);
+
+        ArrayList<ReportData> foundReports = new ArrayList<>();
+
+        ReportData testReport = new ReportData("Dog running around ODU's campus", "Old Dominion University", "757-141-3422", false);
+        foundReports.add(testReport);
+
+        ReportData testReport2 = new ReportData("Dog hiding in the bushes near the Ted", "Ted Constant Convocation Center", "757-163-2422", false);
+        foundReports.add(testReport2);
+
+        ReportData testReport3 = new ReportData("Brown cat walking down the sidewalk", "1400 Melrose Pkwy", "N/A", true);
+        foundReports.add(testReport3);
+
+        ReportData testReport4 = new ReportData("Black cat sitting on a rock near W 49th St", "1416 W 49th Street, Norfolk Virginia", "catfinder@gmail.com", false);
+        foundReports.add(testReport4);
+
+        PopulateReportMap(foundReports);
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(lostPetMarker));
+    }
+
+    public void PopulateReportMap(ArrayList<ReportData> reports) {
+        for (int i = 0; i < reports.size(); i++) {
+
+            if (reports.size() == 0)
+                break;
+
+            List<Address> addressList = new ArrayList<>();
+            Geocoder geocoder = new Geocoder(this);
+
+            ReportData loopData = reports.get(i);
+
+            if (loopData.isFound() == false) {
+                loopData.setImage("lost_dog" + Integer.toString(i));
+                try {
+                    addressList = geocoder.getFromLocationName(loopData.getLocation(), 1);
+                } catch (IOException e) {
+                    Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT)
+                            .show();
+                    e.printStackTrace();
+
+                } finally {
+                    Address address = addressList.get(0);
+
+                    if (address.hasLatitude() && address.hasLongitude()) {
+                        loopData.setLatitude(address.getLatitude());
+                        loopData.setLongitude(address.getLongitude());
+                    }
+                }
+
+                Marker currentMarker = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(loopData.getLatitude(), loopData.getLongitude()))
+                        .title("Lost Pet Sighting"));
+                currentMarker.setTag(loopData);
+            }
+        }//end of for loop
+    }//end of PopulateReportMap
+
+    public void CreateSampleMarker(LatLng lostPetMarker)
+    {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(lostPetMarker)
                 .title("Lost Pet Sighting")
@@ -110,64 +159,5 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Marker m = mMap.addMarker(markerOptions);
         m.setTag(report);
         //m.showInfoWindow();
-
-
-
-        FoundReportActivity classData = ((FoundReportActivity)getApplicationContext());
-        //ArrayList<ReportData> foundReports = classData.getReport();
-        Geocoder geocoder = new Geocoder(this);
-        List<Address> addressList = new ArrayList<>();
-
-
-        ArrayList<ReportData> foundReports = new ArrayList<>();
-
-        ReportData testReport = new ReportData("Dog running around ODU's campus", "Old Dominion University", "757-141-3422", false);
-        foundReports.add(testReport);
-
-        ReportData testReport2 = new ReportData("Dog hiding in the bushes near the Ted", "Ted Constant Convocation Center", "757-163-2422", false);
-        foundReports.add(testReport2);
-
-        ReportData testReport3 = new ReportData("Brown cat walking down the sidewalk", "1400 Melrose Pkwy", "N/A", false);
-        foundReports.add(testReport3);
-
-        ReportData testReport4 = new ReportData("Black cat sitting on a rock near W 49th St", "1416 W 49th Street, Norfolk Virginia", "catfinder@gmail.com", false);
-        foundReports.add(testReport4);
-
-
-        for(int i = 0; i < foundReports.size(); i++)
-        {
-
-            if(foundReports.size() == 0)
-                break;
-
-            ReportData loopData = foundReports.get(i);
-            loopData.setImage("lost_dog" + Integer.toString(i));
-            try {
-                addressList = geocoder.getFromLocationName(loopData.getLocation(), 1);
-
-            } catch (IOException e) {
-                Toast.makeText(this, "Location not found",     Toast.LENGTH_SHORT)
-                        .show();
-                e.printStackTrace();
-
-            } finally {
-                Address address = addressList.get(0);
-
-                if (address.hasLatitude() && address.hasLongitude()) {
-                    loopData.setLatitude(address.getLatitude());
-                    loopData.setLongitude(address.getLongitude());
-                }
-            }
-
-            Marker currentMarker = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(loopData.getLatitude(), loopData.getLongitude()))
-                    .title("Lost Pet Sighting"));
-            currentMarker.setTag(loopData);
-        }//end of for loop
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(lostPetMarker));
-
-        
     }
-
-}
+}//end of class
