@@ -121,16 +121,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         ArrayList<ReportData> foundReports = new ArrayList<>();
 
-        ReportData testReport = new ReportData("description", "Old Dominion University", "555-552-2422", false);
+        ReportData testReport = new ReportData("Dog running around ODU's campus", "Old Dominion University", "757-141-3422", false);
         foundReports.add(testReport);
 
-        ReportData testReport2 = new ReportData("description234", "Ted Constant Convocation Center", "552435-552-2422", false);
+        ReportData testReport2 = new ReportData("Dog hiding in the bushes near the Ted", "Ted Constant Convocation Center", "757-163-2422", false);
         foundReports.add(testReport2);
 
-        ReportData testReport3 = new ReportData("descrip4", "1400 Melrose Pkwy", "5sef2", false);
+        ReportData testReport3 = new ReportData("Brown cat walking down the sidewalk", "1400 Melrose Pkwy", "N/A", false);
         foundReports.add(testReport3);
 
-        ReportData testReport4 = new ReportData("descriasdfp4", "1416 W 49th Street, Norfolk Virginia", "5sef2", false);
+        ReportData testReport4 = new ReportData("Black cat sitting on a rock near W 49th St", "1416 W 49th Street, Norfolk Virginia", "catfinder@gmail.com", false);
         foundReports.add(testReport4);
 
 
@@ -141,7 +141,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
 
             ReportData loopData = foundReports.get(i);
-            loopData.setImage("lost_dog");
+            loopData.setImage("lost_dog" + Integer.toString(i));
             try {
                 addressList = geocoder.getFromLocationName(loopData.getLocation(), 1);
 
@@ -161,7 +161,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             Marker currentMarker = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(loopData.getLatitude(), loopData.getLongitude()))
-                    .snippet(loopData.getDescription())
                     .title("Lost Pet Sighting"));
             currentMarker.setTag(loopData);
         }//end of for loop
