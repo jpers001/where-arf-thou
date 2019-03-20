@@ -68,9 +68,12 @@ public class FoundReportActivity extends AppCompatActivity {
         ReportData entry = new ReportData(description, location, contact, true);
         report.add(entry);
 
+
         submit.putExtra("entry", entry);
 
         startActivity(submit);
     }
+
+    public ArrayList getReport(){return report;}
 
 }

@@ -3,13 +3,16 @@ package edu.odu.cs.air411.wherearfthou;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,8 +23,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -105,6 +110,61 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Marker m = mMap.addMarker(markerOptions);
         m.setTag(report);
         //m.showInfoWindow();
+
+
+
+        FoundReportActivity classData = ((FoundReportActivity)getApplicationContext());
+        //ArrayList<ReportData> foundReports = classData.getReport();
+        Geocoder geocoder = new Geocoder(this);
+        List<Address> addressList = new ArrayList<>();
+
+
+        ArrayList<ReportData> foundReports = new ArrayList<>();
+
+        ReportData testReport = new ReportData("description", "Old Dominion University", "555-552-2422", false);
+        foundReports.add(testReport);
+
+        ReportData testReport2 = new ReportData("description234", "Ted Constant Convocation Center", "552435-552-2422", false);
+        foundReports.add(testReport2);
+
+        ReportData testReport3 = new ReportData("descrip4", "1400 Melrose Pkwy", "5sef2", false);
+        foundReports.add(testReport3);
+
+        ReportData testReport4 = new ReportData("descriasdfp4", "1416 W 49th Street, Norfolk Virginia", "5sef2", false);
+        foundReports.add(testReport4);
+
+
+        for(int i = 0; i < foundReports.size(); i++)
+        {
+
+            if(foundReports.size() == 0)
+                break;
+
+            ReportData loopData = foundReports.get(i);
+            loopData.setImage("lost_dog");
+            try {
+                addressList = geocoder.getFromLocationName(loopData.getLocation(), 1);
+
+            } catch (IOException e) {
+                Toast.makeText(this, "Location not found",     Toast.LENGTH_SHORT)
+                        .show();
+                e.printStackTrace();
+
+            } finally {
+                Address address = addressList.get(0);
+
+                if (address.hasLatitude() && address.hasLongitude()) {
+                    loopData.setLatitude(address.getLatitude());
+                    loopData.setLongitude(address.getLongitude());
+                }
+            }
+
+            Marker currentMarker = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(loopData.getLatitude(), loopData.getLongitude()))
+                    .snippet(loopData.getDescription())
+                    .title("Lost Pet Sighting"));
+            currentMarker.setTag(loopData);
+        }//end of for loop
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(lostPetMarker));
 
