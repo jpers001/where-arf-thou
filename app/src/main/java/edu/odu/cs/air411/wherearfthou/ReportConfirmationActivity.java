@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+
+import com.twitter.sdk.android.core.Twitter;
 
 public class ReportConfirmationActivity extends AppCompatActivity {
 
@@ -18,6 +21,7 @@ public class ReportConfirmationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_confirmation);
+        Twitter.initialize(this);
 
         ReportData entry = (ReportData)getIntent().getSerializableExtra("entry");
 
@@ -27,6 +31,16 @@ public class ReportConfirmationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent returnToMain = new Intent(ReportConfirmationActivity.this, MainActivity.class);
                 startActivity(returnToMain);
+            }
+        });
+
+        Button tweetBtn = findViewById(R.id.tweetBtn);
+        tweetBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                TweetComposer.Builder builder = new TweetComposer.Builder(ReportConfirmationActivity.this)
+                        .text("just setting up my Twitter Kit.");
+                builder.show();
             }
         });
 

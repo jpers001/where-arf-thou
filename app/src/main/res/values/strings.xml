@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="app_name">Where Arf Thou?</string>
     <string name="view_report_map">View Report Map</string>
     <string name="create_new_lost_report">Create new lost report</string>
@@ -36,4 +36,7 @@
     <string name="text_confirm">The following report information has been submitted:</string>
     <string name="button_ok">OK</string>
     <string name="image_display">Display Image</string>
+    <string android:name="com.twitter.sdk.android.CONSUMER_KEY">ccBwyaBsXrlj9lI7dqbpAuw5x</string>
+    <string android:name="com.twitter.sdk.android.CONSUMER_SECRET">w2yHKx1xzl6cwn2k0X16OTtatZAAr7DDmKdA492lvQEk3JBAWY</string>
+    <string name="button_tweet">Tweet This</string>
 </resources>
