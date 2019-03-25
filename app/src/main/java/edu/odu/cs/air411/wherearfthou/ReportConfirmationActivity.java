@@ -16,6 +16,7 @@ public class ReportConfirmationActivity extends AppCompatActivity {
     private TextView descriptTextView;
     private TextView locationTextView;
     private TextView contactTextView;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,15 @@ public class ReportConfirmationActivity extends AppCompatActivity {
         Twitter.initialize(this);
 
         ReportData entry = (ReportData)getIntent().getSerializableExtra("entry");
+
+        if(entry.isFound()){
+            type = "Reporting a sighted stray pet found around ";
+        }
+        else if (!entry.isFound()){
+            type = "My pet was last seen around ";
+        }
+
+        final String tweetString = type + entry.getLocation() + " ";
 
         Button okBtn = findViewById(R.id.okBtn);
         okBtn.setOnClickListener(new View.OnClickListener(){
@@ -39,7 +49,7 @@ public class ReportConfirmationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TweetComposer.Builder builder = new TweetComposer.Builder(ReportConfirmationActivity.this)
-                        .text("just setting up my Twitter Kit.");
+                        .text(tweetString);
                 builder.show();
             }
         });
