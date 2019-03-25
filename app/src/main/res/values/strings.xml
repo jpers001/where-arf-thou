@@ -39,4 +39,5 @@
     <string android:name="com.twitter.sdk.android.CONSUMER_KEY">ccBwyaBsXrlj9lI7dqbpAuw5x</string>
     <string android:name="com.twitter.sdk.android.CONSUMER_SECRET">w2yHKx1xzl6cwn2k0X16OTtatZAAr7DDmKdA492lvQEk3JBAWY</string>
     <string name="button_tweet">Tweet This</string>
+    <string name="title_report_confirmation">Report Submitted</string>
 </resources>
