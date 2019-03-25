@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -22,8 +23,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReportConfirmationActivity"
-            android:label="@string/title_report_confirmation"></activity>
+        <activity android:name=".ReportListingActivity"></activity>
+        <activity
+            android:name=".ReportConfirmationActivity"
+            android:label="@string/title_report_confirmation" />
         <!--
         <activity android:name=".TakePhotoActivity">
             <intent-filter>
@@ -43,7 +46,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,17 +58,17 @@
         <activity
             android:name=".ReportMap"
             android:label="@string/title_activity_report_map"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".FoundReportActivity"
             android:label="@string/title_activity_found_report"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LostReportActivity"
             android:label="@string/title_activity_lost_report"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -78,8 +82,6 @@
             android:name=".TakePhotoActivity"
             android:label="@string/get_image"
             android:parentActivityName=".MainActivity" />
-
-
     </application>
 
 </manifest>
