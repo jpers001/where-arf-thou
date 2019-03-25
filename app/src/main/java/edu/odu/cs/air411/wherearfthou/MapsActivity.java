@@ -22,8 +22,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -159,5 +167,36 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Marker m = mMap.addMarker(markerOptions);
         m.setTag(report);
         //m.showInfoWindow();
+    }
+
+    public ArrayList<ReportData> GetReports() throws IOException
+    {
+        ArrayList<ReportData> reportsFromJson= new ArrayList<>();
+
+        //URL to access report data in JSON format
+        String newURL = "url";
+        URL url = new URL(newURL);
+
+        URLConnection request = url.openConnection();
+        request.connect();
+
+        JsonParser jp = new JsonParser();
+        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+
+        if (root instanceof JsonObject) {
+            System.out.println("JsonObject");
+            JsonObject jobject = root.getAsJsonObject();
+            //Add in code to add a single jobject data to ArrayList<ReportData>
+
+        } else if (root instanceof JsonArray) {
+            JsonArray jarray = root.getAsJsonArray();
+            for(int i = 0; i < jarray.size(); i++)
+            {
+                //Add in code to read JsonArray data into ArrayList<ReportData>
+            }
+        }
+
+        return reportsFromJson;
+
     }
 }//end of class
