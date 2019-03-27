@@ -17,6 +17,7 @@ public class ReportData implements Serializable {
     private ArrayList<String> tags = new ArrayList<>();
     // true = found report, false = lost report
     private boolean isFound;
+    private String photoUri;
 
 
     public String getName() {
@@ -132,4 +133,13 @@ public class ReportData implements Serializable {
     public void addTag(String tag){
         this.tags.add(tag);
     }
+
+    public String getPhotoUri() {
+        return photoUri;
+    }
+
+    public void setPhotoUri(String photoUri) {
+        this.photoUri = photoUri;
+    }
+
 }

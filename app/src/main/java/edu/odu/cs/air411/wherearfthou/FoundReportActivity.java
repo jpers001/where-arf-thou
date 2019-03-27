@@ -53,6 +53,7 @@ public class FoundReportActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         ImageView imageView = findViewById(R.id.imageFromCamera);
         imageView.setImageURI(Uri.parse(TakePhotoActivity.imageFilePath));
+
     }
 
     public void submitForm(ArrayList<ReportData> report){
@@ -68,6 +69,7 @@ public class FoundReportActivity extends AppCompatActivity {
         String contact = contactEditText.getText().toString();
 
         ReportData entry = new ReportData(description, location, contact, true);
+        entry.setPhotoUri(TakePhotoActivity.imageFilePath);
         report.add(entry);
 
 

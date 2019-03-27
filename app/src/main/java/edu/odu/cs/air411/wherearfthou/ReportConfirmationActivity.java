@@ -1,6 +1,7 @@
 package edu.odu.cs.air411.wherearfthou;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +35,7 @@ public class ReportConfirmationActivity extends AppCompatActivity {
         }
 
         final String tweetString = type + entry.getLocation() + " ";
+        final String tweetPhoto = entry.getPhotoUri();
 
         Button okBtn = findViewById(R.id.okBtn);
         okBtn.setOnClickListener(new View.OnClickListener(){
@@ -49,7 +51,8 @@ public class ReportConfirmationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TweetComposer.Builder builder = new TweetComposer.Builder(ReportConfirmationActivity.this)
-                        .text(tweetString);
+                        .text(tweetString)
+                        .image(Uri.parse(tweetPhoto));
                 builder.show();
             }
         });

@@ -67,6 +67,7 @@ public class LostReportActivity extends AppCompatActivity {
         String contact = contactEditText.getText().toString();
 
         ReportData entry = new ReportData(name, description, lastSeen, contact, false);
+        entry.setPhotoUri(TakePhotoActivity.imageFilePath);
         report.add(entry);
 
         submit.putExtra("entry", entry);
