@@ -23,7 +23,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReportListingActivity"></activity>
         <activity
             android:name=".ReportConfirmationActivity"
             android:label="@string/title_report_confirmation" />
