@@ -5,9 +5,9 @@ package helper;
  * Created by Belal on 9/9/2017.
  */
 
-class Report {
+public class Report {
 
-    private String owner, pet_name, last_seen, contact, description;
+    public String owner, pet_name, last_seen, contact, description;
 
 
     public Report(String owner, String pet_name, String last_seen, String contact, String description) {
