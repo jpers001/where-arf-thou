@@ -129,7 +129,7 @@ public class LostReportActivity extends AppCompatActivity {
  *  Perform Network Request
  */
 //inner class to perform network request extending an AsyncTask
-private class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
+public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
     //the url where we need to send the request
     String url;
