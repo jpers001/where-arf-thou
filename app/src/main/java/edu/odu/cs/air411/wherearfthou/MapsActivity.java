@@ -22,10 +22,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -105,6 +107,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         PopulateReportMap(foundReports);
 
+        try {
+            PopulateMapFromJson(GetReports());
+        } catch (IOException e)
+        {
+            //handle the exception
+        }
+
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(lostPetMarker));
     }
 
@@ -120,7 +130,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             ReportData loopData = reports.get(i);
 
             if (loopData.isFound() == false) {
-                loopData.setImage("lost_dog" + Integer.toString(i));
+                loopData.setImage("lost_dog");// + Integer.toString(i));
                 try {
                     addressList = geocoder.getFromLocationName(loopData.getLocation(), 1);
                 } catch (IOException e) {
@@ -169,13 +179,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //m.showInfoWindow();
     }
 
-    public ArrayList<ReportData> GetReports() throws IOException
+    public static ArrayList<ReportData> GetReports() throws IOException
     {
         ArrayList<ReportData> reportsFromJson= new ArrayList<>();
 
         //URL to access report data in JSON format
-        String newURL = "url";
-        URL url = new URL(newURL);
+        URL url = new URL("http://wherearfthou.duckdns.org/wherearf/db/v1/Api.php?apicall=getreports");
 
         URLConnection request = url.openConnection();
         request.connect();
@@ -184,19 +193,39 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
 
         if (root instanceof JsonObject) {
-            System.out.println("JsonObject");
+            Gson gson = new Gson();
             JsonObject jobject = root.getAsJsonObject();
-            //Add in code to add a single jobject data to ArrayList<ReportData>
-
-        } else if (root instanceof JsonArray) {
-            JsonArray jarray = root.getAsJsonArray();
-            for(int i = 0; i < jarray.size(); i++)
+            JsonArray jarray = jobject.get("reports").getAsJsonArray();
+            java.lang.reflect.Type listType = new TypeToken<ArrayList<ReportData>>(){}.getType();
+            reportsFromJson = gson.fromJson(jarray, listType);
+            for(int i = 0; i < reportsFromJson.size(); i++)
             {
-                //Add in code to read JsonArray data into ArrayList<ReportData>
+                ReportData currentReport = reportsFromJson.get(i);
+                currentReport.setLatitude(36.888014 + i/100);
+                currentReport.setLongitude(-76.304157 + i/100);
+                reportsFromJson.set(i, currentReport);
             }
         }
 
         return reportsFromJson;
+    }
 
+    public void PopulateMapFromJson(ArrayList<ReportData> reports)
+    {
+        for(int i = 0; i < reports.size(); i++)
+        {
+            ReportData currentReport = reports.get(i);
+            double latitude = .01;
+            double longitude = .01;
+            currentReport.setLatitude(36.888014 + latitude*i);
+            currentReport.setLongitude(-76.304157 + longitude*i);
+            currentReport.setImage("lost_dog");
+
+            Marker currentMarker = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(currentReport.getLatitude(), currentReport.getLongitude()))
+                    .title("Lost Pet Sighting"));
+            currentMarker.setTag(currentReport);
+
+        }
     }
 }//end of class
