@@ -18,7 +18,7 @@ import android.widget.Button;
  */
 public class RegistrationFragment extends Fragment {
 
-    private EditText Name,UserName,UserPassword;
+    private EditText Name,User_Name,Password;
     private Button BnRegister;
 
 
@@ -34,11 +34,11 @@ public class RegistrationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_registration, container, false);
         Name= view.findViewById(R.id.txt_name);
-        UserName=view.findViewById(R.id.User_Name);
-        UserPassword=view.findViewById(R.id.Password);
+        User_Name=view.findViewById(R.id.txt_user_name);
+        Password=view.findViewById(R.id.txt_password);
         BnRegister = view.findViewById(R.id.register_bn);
 
-        ((View) BnRegister).setOnClickListener(new View.OnClickListener()
+        BnRegister.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -53,8 +53,8 @@ public class RegistrationFragment extends Fragment {
     public void performRegistration()
     {
         String name= Name.getText().toString();
-        String username= UserName.getText().toString();
-        String password= UserPassword.getText().toString();
+        String username= User_Name.getText().toString();
+        String password= Password.getText().toString();
         Call<User> call= LoginActivity.apiInterface.performRegistration(name,username,password);
 
         call.enqueue(new Callback<User>() {
@@ -81,8 +81,8 @@ public class RegistrationFragment extends Fragment {
             }
         });
         Name.setText("");
-        UserPassword.setText("");
-        UserName.setText("");
+        Password.setText("");
+        User_Name.setText("");
 
     }
 

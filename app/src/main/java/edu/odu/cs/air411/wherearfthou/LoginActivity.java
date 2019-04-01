@@ -44,9 +44,9 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.On
     }
 
     @Override
-    public void performLogin(String Name)
+    public void performLogin(String name)
     {
-        prefConfig.writeName(Name);
+        prefConfig.writeName(name);
 
         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
         startActivity(intent);

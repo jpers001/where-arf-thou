@@ -19,7 +19,8 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment
+{
 
     private TextView RegText;
     public EditText User_Name,Password;
@@ -28,51 +29,53 @@ public class LoginFragment extends Fragment {
     public interface OnLoginActivityListener
     {
         void performRegister();
-        void performLogin(String Name);
+        void performLogin(String name);
     }
 
     public LoginFragment() {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_login, container, false);
-        RegText = view.findViewById(R.id.register_txt);
-        User_Name= view.findViewById(R.id.User_Name);
-        Password=view.findViewById(R.id.Password);
-        LoginBn=view.findViewById(R.id.login_bn);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        //Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_login,container,false);
+        RegText= view.findViewById(R.id.register_txt);
+        User_Name= view.findViewById(R.id.txt_user_name);
+        Password= view.findViewById(R.id.txt_user_name);
+        LoginBn= view.findViewById(R.id.login_bn);
+
         LoginBn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                performLogin();
             }
         });
+
         RegText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 LoginActivityListener.performRegister();
             }
         });
         return view;
     }
+
     @Override
     public void onAttach(Context context)
     {
         super.onAttach(context);
-        Activity activity = (Activity)context;
+        Activity activity= (Activity) context;
         LoginActivityListener = (OnLoginActivityListener) activity;
+
     }
 
-    public void performLogin()
+    private void performLogin()
     {
-        String username = User_Name.getText().toString();
-        String password = Password.getText().toString();
+        String username= User_Name.getText().toString();
+        String password=Password.getText().toString();
+
         Call<User> call= LoginActivity.apiInterface.performLogin(username,password);
         call.enqueue(new Callback<User>() {
             @Override
@@ -87,16 +90,19 @@ public class LoginFragment extends Fragment {
                 {
                     LoginActivity.prefConfig.Display("Login Failed..Please try again...");
                 }
-
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
 
-            })
+            }
+        });
 
-                    username.setText("");
-                    password.setText("");
-        }
-
+        User_Name.setText("");
+        Password.setText("");
     }
+
+
+
+
+}
