@@ -1,6 +1,7 @@
 package edu.odu.cs.air411.wherearfthou;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -30,6 +32,10 @@ public class TakePhotoActivity extends AppCompatActivity {
     public static File image;
 
 
+    private String[] appPermissions = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
     public static final int REQUEST_IMAGE = 100;
     public static final int REQUEST_PERMISSION = 200;
     public static String imageFilePath = "";
@@ -47,7 +53,8 @@ public class TakePhotoActivity extends AppCompatActivity {
         //captureFront = findViewById(R.id.captureFront);
         imageView = findViewById(R.id.imageView2);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+        requestPermissions();
+        /*if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_PERMISSION);
@@ -57,7 +64,7 @@ public class TakePhotoActivity extends AppCompatActivity {
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA},
                     REQUEST_PERMISSION);
-        }
+        }*/
 
         /**captureFront.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +75,26 @@ public class TakePhotoActivity extends AppCompatActivity {
         openCameraIntent();
         finish();
 
+    }
+
+    /**
+     * Function that checks permissions and requests them, if necessary all in one go
+     * Permissions requested will be asked all at once in a grouping
+     */
+    private void requestPermissions(){
+        ArrayList<String> permissionsNeededList = new ArrayList<>();
+        //Checks current permissions, and determines which permissions need to be asked for
+        for(String perm : appPermissions){
+            if(ContextCompat.checkSelfPermission(this, perm) != PackageManager.PERMISSION_GRANTED){
+                permissionsNeededList.add(perm);
+            }
+        }
+        //Asks for permissions based on the previous check, if any
+        if(!permissionsNeededList.isEmpty()){
+            ActivityCompat.requestPermissions(this,
+                    permissionsNeededList.toArray(new String[permissionsNeededList.size()]),
+                    REQUEST_PERMISSION);
+        }
     }
 
     private void openCameraIntent() {
