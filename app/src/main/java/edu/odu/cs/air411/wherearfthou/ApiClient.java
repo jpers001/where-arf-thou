@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient
 {
     //ip for accessing localhost using retrofit
-    public static final String BASE_URL= "http://10.0.2.2/var/www/html/wherearf";
+    public static final String BASE_URL= "http://wherearfthou.duckdns.org/wherearf/";
     public static Retrofit retrofit = null;
 
     public static Retrofit getApiClient()
