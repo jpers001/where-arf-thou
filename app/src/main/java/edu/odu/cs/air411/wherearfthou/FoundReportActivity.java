@@ -8,16 +8,19 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,6 +48,8 @@ public class FoundReportActivity extends AppCompatActivity {
     public static final int IMAGE_REQ = 998;
     public ArrayList<ReportData> report = new ArrayList<>();
     private Bitmap bitmap;
+    boolean hasImage = false;
+    private Uri imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,12 +83,28 @@ public class FoundReportActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ImageView imageView = findViewById(R.id.imageFromCamera);
+        imagePath = Uri.parse(TakePhotoActivity.imageFilePath);
         imageView.setImageURI(Uri.parse(TakePhotoActivity.imageFilePath));
         try {
-            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(TakePhotoActivity.imageFilePath));
+
+            /**
+             * ERROR OCCURS HERE!
+             * For some reason it keeps throwing a file not found exception at this URI. Might have to do with how it's
+             * reading in the URI or maybe something with the file doesn't match up with what it wants.
+             */
+            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(TakePhotoActivity.imageFilePath));
+            hasImage = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String convertBase64(Bitmap bitmap){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
     }
 
     public void submitForm(ArrayList<ReportData> report){
@@ -100,6 +121,12 @@ public class FoundReportActivity extends AppCompatActivity {
         //db: contact
         contactEditText = findViewById(R.id.contactEditText);
         String contact = contactEditText.getText().toString();
+
+        if(hasImage){
+            TextView testText = findViewById(R.id.bmpTest);
+            String encodedImage = convertBase64(bitmap);
+            testText.setText(encodedImage);
+        }
 
 
         /**
@@ -136,13 +163,6 @@ public class FoundReportActivity extends AppCompatActivity {
 
 
     } //end submitForm
-
-
-    /**
-     * What's this doing? Can we delete it?     *
-     */
-    public ArrayList getReport(){return report;}
-
 
     /**
      *  Perform Network Request
