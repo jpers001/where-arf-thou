@@ -47,14 +47,13 @@
     <string name="last_seen">Last Seen</string>
     <string name="contact">Contact</string>
     <string name="description">Description</string>
-    <string name="Login">Login</string>
-    <string name="Register">Register</string>
-    <string name="name">name</string>
-    <string name="User_Name">User_Name</string>
+    <string name="Login_bn">Login</string>
+    <string name="Register2">Register</string>
+    <string name="Register">New User? Register Now?</string>
+    <string name="Name">Name</string>
+    <string name="User_Name">User Name</string>
     <string name="Password">Password</string>
-    <string name="preference_file">edu.odu.ce.air.411.preference_file</string>
-    <string name="preference_login_status">edu.odu.ce.air.411.preference_login_status</string>
-    <string name="preference_user_name">edu.odu.ce.air.411.preference_user_name</string>
+    <string name="Password2">Confirm Password</string>
 
 
 </resources>
