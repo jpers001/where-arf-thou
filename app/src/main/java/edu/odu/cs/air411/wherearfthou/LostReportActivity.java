@@ -34,7 +34,7 @@ public class LostReportActivity extends AppCompatActivity {
      *
      *   defaultOwner: I assume the Owner of the pet will be the user? I have hardcoded the name for now.
      */
-    EditText nameEditText, descriptEditText2, lastSeenEditText, contactEditText;
+    EditText nameEditText, descriptEditText2, lastSeenEditText, contactEditText, locationEditText;
     String defaultOwner = "WhereArfThou"; //should be userName later.
 
     public static final int CODE_POST_REQUEST = 1025;
@@ -102,6 +102,10 @@ public class LostReportActivity extends AppCompatActivity {
          contactEditText = findViewById(R.id.editText3);
         String contact = contactEditText.getText().toString();
 
+        //db: location
+          locationEditText = findViewById(R.id.editText4);
+          String location = locationEditText.getText().toString();
+
         /**
          * QUERY: What is the below stuff used for? Do we need this anymore?
          */
@@ -128,6 +132,8 @@ public class LostReportActivity extends AppCompatActivity {
         params.put("last_seen", lastSeen);
         params.put("contact", contact);
         params.put("description", description);
+        params.put("photo", null);
+        params.put("location", location);
         // Call api to create report
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_REPORT,params,CODE_POST_REQUEST);
         request.execute();
