@@ -1,9 +1,11 @@
 package edu.odu.cs.air411.wherearfthou;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -41,6 +44,7 @@ public class FoundReportActivity extends AppCompatActivity {
 
     public static final int IMAGE_REQ = 998;
     public ArrayList<ReportData> report = new ArrayList<>();
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +79,11 @@ public class FoundReportActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         ImageView imageView = findViewById(R.id.imageFromCamera);
         imageView.setImageURI(Uri.parse(TakePhotoActivity.imageFilePath));
-
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(TakePhotoActivity.imageFilePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void submitForm(ArrayList<ReportData> report){
