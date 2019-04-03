@@ -1,6 +1,7 @@
 package edu.odu.cs.air411.wherearfthou;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -71,6 +72,15 @@ AlertDialog.Builder builder;
                     BackgroundTask backgroundTask= new BackgroundTask(RegisterActivity.this);
                     backgroundTask.execute("Regrister",Name.getText().toString(),User_Name.getText().toString(),Password.getText().toString());
                 }
+            }
+        });
+
+        Button skipBtn = findViewById(R.id.skipBtn);
+        skipBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent goToMain = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(goToMain);
             }
         });
     }
