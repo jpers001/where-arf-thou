@@ -20,11 +20,11 @@ AlertDialog.Builder builder;
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Name=(EditText)findViewById(R.id.txt_name);
-        User_Name=(EditText)findViewById(R.id.txt_user_name);
-        Password=(EditText)findViewById(R.id.txt_password);
-        conPassword=(EditText)findViewById(R.id.txt_con_password);
-        reg_button=(Button)findViewById(R.id.register_bn);
+        Name=(EditText)findViewById(R.id.reg_name);
+        User_Name=(EditText)findViewById(R.id.reg_username);
+        Password=(EditText)findViewById(R.id.reg_password);
+        conPassword=(EditText)findViewById(R.id.reg_con_password);
+        reg_button=(Button)findViewById(R.id.register_button);
         reg_button.setOnClickListener(new View.OnClickListener()
         {
             @Override
