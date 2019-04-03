@@ -8,6 +8,8 @@
     android:background="@drawable/new_bg_main"
     tools:context=".MainActivity">
 
+
+
     <Button
         android:id="@+id/map"
         android:layout_width="225dp"
