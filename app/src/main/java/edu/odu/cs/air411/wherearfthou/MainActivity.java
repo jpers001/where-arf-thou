@@ -62,12 +62,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         {
-            ActionBar actionBar = getSupportActionBar(); // or getActionBar();
-            getSupportActionBar().setTitle("Where Arf Thou?"); // set the top title
-            String title = actionBar.getTitle().toString(); // get the title
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setLogo(R.mipmap.ic_launcher_round);
-            getSupportActionBar().setDisplayUseLogoEnabled(true);
+            {
+                ActionBar actionBar = getSupportActionBar(); // or getActionBar();
+                String title = actionBar.getTitle().toString(); // get the title
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
+                getSupportActionBar().setLogo(R.drawable.ic_wat_icon);
+                getSupportActionBar().setDisplayUseLogoEnabled(true);
+            }
+
         }
 
 

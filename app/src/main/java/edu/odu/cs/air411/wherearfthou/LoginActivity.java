@@ -2,6 +2,7 @@ package edu.odu.cs.air411.wherearfthou;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -9,6 +10,9 @@ import helper.BackgroundTask;
 
 public class LoginActivity extends AppCompatActivity
 {
+
+
+
     TextView sign_up_text;
 
     @Override
@@ -21,6 +25,9 @@ public class LoginActivity extends AppCompatActivity
             public void onClick(View v) {
 
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+
+
+
 
             }
         });
