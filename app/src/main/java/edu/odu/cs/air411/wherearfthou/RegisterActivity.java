@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import android.app.*;
+import helper.BackgroundTask;
 
 public class RegisterActivity extends AppCompatActivity
 {
@@ -65,7 +66,11 @@ AlertDialog.Builder builder;
                     AlertDialog alertDialog= builder.create();
                     alertDialog.show();
                 }
-
+                else
+                {
+                    BackgroundTask backgroundTask= new BackgroundTask(RegisterActivity.this);
+                    backgroundTask.execute("Regrister",Name.getText().toString(),User_Name.getText().toString(),Password.getText().toString());
+                }
             }
         });
     }

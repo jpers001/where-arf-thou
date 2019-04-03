@@ -94,6 +94,9 @@
             android:gravity="center"
             android:layout_alignParentBottom="true"
             android:id="@+id/sign_up"
+            android:clickable="true"
+
+
 
             />
 
