@@ -2,6 +2,7 @@ package edu.odu.cs.air411.wherearfthou;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -42,13 +43,14 @@ public class FoundReportActivity extends AppCompatActivity {
     EditText descriptEditText, locationEditText, contactEditText;
     String defaultOwner = "Unknown";
     String defaultPetName = "Unknown";
+    String encoded = "N/A"; //default
 
     public static final int CODE_POST_REQUEST = 1025;
     public static final int CODE_GET_REQUEST = 1024;
 
     public static final int IMAGE_REQ = 998;
     public ArrayList<ReportData> report = new ArrayList<>();
-    private Bitmap bitmap;
+    public Bitmap bitmap;
     boolean hasImage = false;
     private Uri imagePath;
 
@@ -93,19 +95,25 @@ public class FoundReportActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.imageFromCamera);
         imagePath = Uri.parse(TakePhotoActivity.imageFilePath);
         imageView.setImageURI(Uri.parse(TakePhotoActivity.imageFilePath));
-        try {
 
-            /**
-             * ERROR OCCURS HERE!
-             * For some reason it keeps throwing a file not found exception at this URI. Might have to do with how it's
-             * reading in the URI or maybe something with the file doesn't match up with what it wants.
-             */
-            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(TakePhotoActivity.imageFilePath));
-            hasImage = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+        // get absolute path of image file (photofile)
+        String filePath = TakePhotoActivity.photoFile.getAbsolutePath();
+        // create bitmap of photofile
+        bitmap = BitmapFactory.decodeFile(filePath);
+        // new bytearray
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        // compress bitmap into bytearray
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        // creating bytearray
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        // encode bytearray into base64
+        encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+
+
+
+
+    } //end onactivityresult
 
     public String convertBase64(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -130,11 +138,11 @@ public class FoundReportActivity extends AppCompatActivity {
         contactEditText = findViewById(R.id.contactEditText);
         String contact = contactEditText.getText().toString();
 
-        if(hasImage){
+        /*if(hasImage){
             TextView testText = findViewById(R.id.bmpTest);
             String encodedImage = convertBase64(bitmap);
             testText.setText(encodedImage);
-        }
+        }*/
 
 
         /**
@@ -164,6 +172,7 @@ public class FoundReportActivity extends AppCompatActivity {
         params.put("last_seen", location);
         params.put("contact", contact);
         params.put("description", description);
+        params.put("photo", encoded);
         // Call api to create report
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_REPORT,params,CODE_POST_REQUEST);
         request.execute();

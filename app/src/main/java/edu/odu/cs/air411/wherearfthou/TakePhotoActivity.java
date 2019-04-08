@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ public class TakePhotoActivity extends AppCompatActivity {
     public ImageView imageView;
     public static Drawable imageDrawable;
     public static File image;
+    public static File photoFile = null;
+    public static Bitmap imageBitmap;
 
 
     private String[] appPermissions = {
@@ -97,11 +100,11 @@ public class TakePhotoActivity extends AppCompatActivity {
         }
     }
 
-    private void openCameraIntent() {
+    public void openCameraIntent() {
         Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (pictureIntent.resolveActivity(getPackageManager()) != null) {
 
-            File photoFile = null;
+
             try {
                 photoFile = createImageFile();
             }
@@ -110,6 +113,7 @@ public class TakePhotoActivity extends AppCompatActivity {
                 return;
             }
             Uri photoUri = FileProvider.getUriForFile(this, getPackageName() +".provider", photoFile);
+
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
             startActivityForResult(pictureIntent, REQUEST_IMAGE);
         }
@@ -136,6 +140,8 @@ public class TakePhotoActivity extends AppCompatActivity {
 
 
                 imageView.setImageURI(Uri.parse(imageFilePath));
+                Bundle extras = data.getExtras();
+                 imageBitmap = (Bitmap) extras.get("data");
 
                 Toast.makeText(this, "Photo Saved", Toast.LENGTH_SHORT).show();
 
