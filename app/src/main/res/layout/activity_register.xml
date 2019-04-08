@@ -117,7 +117,7 @@
             android:layout_marginTop="25dp"
             android:background="@drawable/button_color"
             android:text="@string/register_bn_label"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textColor="@android:color/white"
             android:textStyle="bold"
 
             />

@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
@@ -76,6 +77,13 @@ public class FoundReportActivity extends AppCompatActivity {
             }
         });
 
+        {
+            ActionBar actionBar = getSupportActionBar(); // or getActionBar();
+            String title = actionBar.getTitle().toString(); // get the title
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setLogo(R.drawable.ic_wat_icon);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
+        }
 
     }
 

@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import helper.Report;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -107,13 +109,33 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         PopulateReportMap(foundReports);
 
+        ArrayList<ReportData> jsonReports = new ArrayList<>();
         try {
-            PopulateMapFromJson(GetReports());
+            jsonReports = GetReports();
         } catch (IOException e)
         {
             //handle the exception
-        }
+            System.out.println("IOException from MapsActivity (line 117)");
+        } finally {
+            for(int i = 0; i < jsonReports.size(); i++)
+            {
+                ReportData currentReport = jsonReports.get(i);
+                System.out.println("Report " + Integer.toString(i));
+                System.out.println("Owner: " + currentReport.getName());
+                System.out.println("Name: " + currentReport.getName());
+                System.out.println("Description: " + currentReport.getDescription());
+                System.out.println("Contact: " + currentReport.getContact());
+                System.out.println("Last Seen: " + currentReport.getReportDate());
+                System.out.println("Tags: " + currentReport.getTags());
+                System.out.println("Location: " + currentReport.getLocation());
+                System.out.println("Latitude: " + currentReport.getLatitude());
+                System.out.println("Longitude: " + currentReport.getLongitude());
+                System.out.println("Image: " + currentReport.getImage());
+                System.out.println();
+            }
 
+            PopulateMapFromJson(jsonReports);
+        }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(lostPetMarker));
     }
@@ -193,21 +215,33 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
 
         if (root instanceof JsonObject) {
-            Gson gson = new Gson();
             JsonObject jobject = root.getAsJsonObject();
             JsonArray jarray = jobject.get("reports").getAsJsonArray();
-            java.lang.reflect.Type listType = new TypeToken<ArrayList<ReportData>>(){}.getType();
-            reportsFromJson = gson.fromJson(jarray, listType);
-            for(int i = 0; i < reportsFromJson.size(); i++)
+
+            for(int i = 0; i < jarray.size(); i++)
             {
-                ReportData currentReport = reportsFromJson.get(i);
-                currentReport.setLatitude(36.888014 + i/100);
-                currentReport.setLongitude(-76.304157 + i/100);
-                reportsFromJson.set(i, currentReport);
+                JsonObject currentJsonObject = jarray.get(i).getAsJsonObject();
+
+                if(currentJsonObject.isJsonNull() != true)
+                {
+                    ReportData currentReport = new ReportData();
+                    currentReport.setName(getNullAsEmptyString(currentJsonObject.get("pet_name")));
+                    currentReport.setImage(getNullAsEmptyString(currentJsonObject.get("photo")));
+                    currentReport.setLocation(getNullAsEmptyString(currentJsonObject.get("location")));
+                    currentReport.setReportDate(getNullAsEmptyString(currentJsonObject.get("last_seen")));
+                    reportsFromJson.add(currentReport);
+                }
             }
         }
 
         return reportsFromJson;
+    }
+
+    public static String getNullAsEmptyString(JsonElement jsonElement) {
+        if(jsonElement.isJsonNull())
+            return "";
+        else
+            return jsonElement.getAsString();
     }
 
     public void PopulateMapFromJson(ArrayList<ReportData> reports)
