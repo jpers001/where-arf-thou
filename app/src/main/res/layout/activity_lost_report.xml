@@ -8,28 +8,6 @@
     android:background="@drawable/white_bg"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="296dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="Tap to enter location"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:textSize="50px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintVertical_bias="0.667"
-        tools:targetApi="o" />
-
     <ImageButton
         android:id="@+id/addPhotoImgBtn"
         android:layout_width="wrap_content"
@@ -44,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.203"
+        app:layout_constraintVertical_bias="0.07"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <TextView
@@ -64,7 +42,7 @@
         app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.364" />
+        app:layout_constraintVertical_bias="0.250" />
 
     <EditText
         android:id="@+id/editText"
@@ -84,7 +62,7 @@
         app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.414"
+        app:layout_constraintVertical_bias="0.295"
 
         tools:targetApi="o" />
 
@@ -105,7 +83,7 @@
         app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.468" />
+        app:layout_constraintVertical_bias="0.390" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -121,7 +99,7 @@
         app:layout_constraintHorizontal_bias="0.13"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.468"
+        app:layout_constraintVertical_bias="0.390"
         app:srcCompat="@drawable/tag_icon" />
 
     <TextView
@@ -142,7 +120,7 @@
         app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.543" />
+        app:layout_constraintVertical_bias="0.48" />
 
     <EditText
         android:id="@+id/descriptEditText2"
@@ -159,10 +137,10 @@
         android:textSize="50px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.597"
+        app:layout_constraintVertical_bias="0.535"
         tools:targetApi="o" />
 
     <TextView
@@ -183,7 +161,7 @@
         app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.692" />
+        app:layout_constraintVertical_bias="0.620" />
 
     <EditText
         android:id="@+id/editText2"
@@ -201,10 +179,10 @@
         android:textSize="50px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.749"
+        app:layout_constraintVertical_bias="0.68"
         tools:targetApi="o" />
 
     <ImageView
@@ -221,7 +199,7 @@
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75"
+        app:layout_constraintVertical_bias="0.68"
         app:srcCompat="@drawable/gps_icon" />
 
     <TextView
@@ -241,7 +219,7 @@
         app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.814" />
+        app:layout_constraintVertical_bias="0.77" />
 
     <EditText
         android:id="@+id/editText3"
@@ -258,10 +236,10 @@
         android:textSize="50px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.875"
+        app:layout_constraintVertical_bias="0.83"
         tools:targetApi="o" />
 
     <Button

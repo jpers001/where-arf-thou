@@ -102,9 +102,6 @@ public class LostReportActivity extends AppCompatActivity {
          contactEditText = findViewById(R.id.editText3);
         String contact = contactEditText.getText().toString();
 
-        //db: location
-          locationEditText = findViewById(R.id.editText4);
-          String location = locationEditText.getText().toString();
 
         /**
          * QUERY: What is the below stuff used for? Do we need this anymore?
@@ -133,7 +130,7 @@ public class LostReportActivity extends AppCompatActivity {
         params.put("contact", contact);
         params.put("description", description);
         params.put("photo", null);
-        params.put("location", location);
+        params.put("location", lastSeen);
         // Call api to create report
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_REPORT,params,CODE_POST_REQUEST);
         request.execute();
