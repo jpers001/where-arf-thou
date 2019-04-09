@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,14 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -43,6 +40,7 @@ public class FoundReportActivity extends AppCompatActivity {
     EditText descriptEditText, locationEditText, contactEditText;
     String defaultOwner = "Unknown";
     String defaultPetName = "Unknown";
+    String defaultLocation = "Unknown";
     String encoded = "N/A"; //default
 
     public static final int CODE_POST_REQUEST = 1025;
@@ -103,15 +101,13 @@ public class FoundReportActivity extends AppCompatActivity {
         // new bytearray
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         // compress bitmap into bytearray
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
         // creating bytearray
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         // encode bytearray into base64
         encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-
-
-
-
+        bitmap = null;
+        byteArray = null;
 
     } //end onactivityresult
 
@@ -173,6 +169,7 @@ public class FoundReportActivity extends AppCompatActivity {
         params.put("contact", contact);
         params.put("description", description);
         params.put("photo", encoded);
+        params.put("location", defaultLocation);
         // Call api to create report
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_REPORT,params,CODE_POST_REQUEST);
         request.execute();

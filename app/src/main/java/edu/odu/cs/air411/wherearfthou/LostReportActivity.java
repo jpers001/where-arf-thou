@@ -2,13 +2,14 @@ package edu.odu.cs.air411.wherearfthou;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +20,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -37,6 +38,8 @@ public class LostReportActivity extends AppCompatActivity {
      */
     EditText nameEditText, descriptEditText2, lastSeenEditText, contactEditText, locationEditText;
     String defaultOwner = "WhereArfThou"; //should be userName later.
+    String defaultLocation = null;
+    String encoded = null;
 
     public static final int CODE_POST_REQUEST = 1025;
     public static final int CODE_GET_REQUEST = 1024;
@@ -44,7 +47,7 @@ public class LostReportActivity extends AppCompatActivity {
 
     public static final int IMAGE_REQ = 997;
     public ArrayList<ReportData> report = new ArrayList<>();
-    private Bitmap bitmap;
+    public Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +86,19 @@ public class LostReportActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         ImageView imageView = findViewById(R.id.imageFromCamera);
         imageView.setImageURI(Uri.parse(TakePhotoActivity.imageFilePath));
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(TakePhotoActivity.imageFilePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        // get absolute path of image file (photofile)
+        String filePath = TakePhotoActivity.photoFile.getAbsolutePath();
+        // create bitmap of photofile
+        bitmap = BitmapFactory.decodeFile(filePath);
+        // new bytearray
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        // compress bitmap into bytearray
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        // creating bytearray
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        // encode bytearray into base64
+        encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
     public void submitForm(ArrayList<ReportData> report){
@@ -108,6 +119,10 @@ public class LostReportActivity extends AppCompatActivity {
         //db: contact
          contactEditText = findViewById(R.id.editText3);
         String contact = contactEditText.getText().toString();
+
+        String location = defaultLocation;
+        String owner = defaultOwner;
+        String photo = encoded;
 
 
         /**
@@ -131,13 +146,13 @@ public class LostReportActivity extends AppCompatActivity {
          *    4. Hard coded the "owner" field. Assuming it would eventually use the username?
          */
         HashMap<String,String> params = new HashMap<>();
-        params.put("owner", defaultOwner);
+        params.put("owner", owner);
         params.put("pet_name", name);
         params.put("last_seen", lastSeen);
         params.put("contact", contact);
         params.put("description", description);
-        params.put("photo", null);
-        params.put("location", lastSeen);
+        params.put("photo", photo);
+        params.put("location", location);
         // Call api to create report
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_REPORT,params,CODE_POST_REQUEST);
         request.execute();
