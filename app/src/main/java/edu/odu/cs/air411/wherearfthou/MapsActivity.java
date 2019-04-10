@@ -32,6 +32,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ import java.util.List;
 
 import helper.Report;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, ReportGetter.ReportGetterListener {
 
     private GoogleMap mMap;
 
@@ -107,14 +108,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         ReportData testReport4 = new ReportData("Black cat sitting on a rock near W 49th St", "1416 W 49th Street, Norfolk Virginia", "catfinder@gmail.com", false);
         foundReports.add(testReport4);
 
-        PopulateReportMap(foundReports);
+        //PopulateReportMap(foundReports);
 
-        ArrayList<ReportData> jsonReports = new ArrayList<>();
-        try {
+
+        /*        try {
             jsonReports = GetReports();
         } catch (IOException e)
         {
             //handle the exception
+            e.printStackTrace();
             System.out.println("IOException from MapsActivity (line 117)");
         } finally {
             for(int i = 0; i < jsonReports.size(); i++)
@@ -135,9 +137,76 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             PopulateMapFromJson(jsonReports);
-        }
+        }*/
+
+        new ReportGetter(this).execute();
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(lostPetMarker));
+    }
+
+    public void onReportGetterCompleted(ArrayList<ReportData> reports)
+    {
+        for (int i = 0; i < reports.size(); i++) {
+
+            if (reports.size() == 0)
+                break;
+
+            List<Address> addressList = new ArrayList<>();
+            Geocoder geocoder = new Geocoder(this);
+
+            ReportData loopData = reports.get(i);
+
+            if (loopData.isFound() == false) {
+                loopData.setImage("lost_dog");// + Integer.toString(i));
+
+                if(loopData.getLocation() != "") {
+                    try {
+                        addressList = geocoder.getFromLocationName(loopData.getLocation(), 1);
+                    } catch (IOException e) {
+                        Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT)
+                                .show();
+                        e.printStackTrace();
+
+                    } finally {
+                        if(addressList.size() != 0) {
+                            Address address = addressList.get(0);
+
+                            if (address.hasLatitude() && address.hasLongitude()) {
+                                loopData.setLatitude(address.getLatitude());
+                                loopData.setLongitude(address.getLongitude());
+                            }
+                        }//end of if addressList.size() != 0
+                    }
+                }
+                else
+                {
+                    loopData.setLatitude(36.888014);
+                    loopData.setLongitude(-76.304157 + .001*i);
+                }
+                Marker currentMarker = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(loopData.getLatitude(), loopData.getLongitude()))
+                        .title("Lost Pet Sighting"));
+                currentMarker.setTag(loopData);
+            }
+
+            System.out.println("Report " + Integer.toString(i));
+            System.out.println("Owner: " + loopData.getName());
+            System.out.println("Name: " + loopData.getName());
+            System.out.println("Description: " + loopData.getDescription());
+            System.out.println("Contact: " + loopData.getContact());
+            System.out.println("Last Seen: " + loopData.getReportDate());
+            System.out.println("Tags: " + loopData.getTags());
+            System.out.println("Location: " + loopData.getLocation());
+            System.out.println("Latitude: " + loopData.getLatitude());
+            System.out.println("Longitude: " + loopData.getLongitude());
+            System.out.println("Image: " + loopData.getImage());
+            System.out.println();
+        }//end of for loop
+    }
+
+    public void onReportGetterError(String error)
+    {
+        System.out.println(error);
     }
 
     public void PopulateReportMap(ArrayList<ReportData> reports) {

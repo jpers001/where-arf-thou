@@ -61,7 +61,7 @@ public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
         }
 
         tags_tv.setText(arrString);
-        contactInfo_tv.setText(reportWindowData.getContact());
+        contactInfo_tv.setText("Contact: " + reportWindowData.getContact());
 
         return view;
     }
