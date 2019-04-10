@@ -21,7 +21,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import helper.Api;
@@ -38,8 +40,11 @@ public class LostReportActivity extends AppCompatActivity {
      */
     EditText nameEditText, descriptEditText2, lastSeenEditText, contactEditText, locationEditText;
     String defaultOwner = "WhereArfThou"; //should be userName later.
-    String defaultLocation = null;
-    String encoded = null;
+    String defaultLocation = "N/A";
+    String encoded = "N/A";
+    String last_seen = "NoDate";
+    String owner = defaultOwner;
+
 
     public static final int CODE_POST_REQUEST = 1025;
     public static final int CODE_GET_REQUEST = 1024;
@@ -94,12 +99,14 @@ public class LostReportActivity extends AppCompatActivity {
         // new bytearray
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         // compress bitmap into bytearray
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
         // creating bytearray
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         // encode bytearray into base64
         encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-    }
+        bitmap = null;
+        byteArray = null;
+    } //end onactivityresult
 
     public void submitForm(ArrayList<ReportData> report){
         Intent submit = new Intent(LostReportActivity.this, ReportConfirmationActivity.class);
@@ -112,23 +119,22 @@ public class LostReportActivity extends AppCompatActivity {
          descriptEditText2 = findViewById(R.id.descriptEditText2);
         String description = descriptEditText2.getText().toString();
 
-        //db: last_seen
+        //db: location
          lastSeenEditText = findViewById(R.id.editText2);
-        String lastSeen = lastSeenEditText.getText().toString();
+        String location = lastSeenEditText.getText().toString();
 
         //db: contact
          contactEditText = findViewById(R.id.editText3);
         String contact = contactEditText.getText().toString();
 
-        String location = defaultLocation;
-        String owner = defaultOwner;
-        String photo = encoded;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        last_seen = simpleDateFormat.format(new Date());
 
 
         /**
          * QUERY: What is the below stuff used for? Do we need this anymore?
          */
-        ReportData entry = new ReportData(name, description, lastSeen, contact, false);
+        ReportData entry = new ReportData(name, description, location, contact, false);
         entry.setPhotoUri(TakePhotoActivity.imageFilePath);
         report.add(entry);
 
@@ -148,10 +154,10 @@ public class LostReportActivity extends AppCompatActivity {
         HashMap<String,String> params = new HashMap<>();
         params.put("owner", owner);
         params.put("pet_name", name);
-        params.put("last_seen", lastSeen);
+        params.put("last_seen", last_seen);
         params.put("contact", contact);
         params.put("description", description);
-        params.put("photo", photo);
+        params.put("photo", encoded);
         params.put("location", location);
         // Call api to create report
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_REPORT,params,CODE_POST_REQUEST);

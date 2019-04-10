@@ -21,7 +21,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import helper.Api;
@@ -42,6 +44,7 @@ public class FoundReportActivity extends AppCompatActivity {
     String defaultPetName = "Unknown";
     String defaultLocation = "Unknown";
     String encoded = "N/A"; //default
+    String last_seen = "NoDate";
 
     public static final int CODE_POST_REQUEST = 1025;
     public static final int CODE_GET_REQUEST = 1024;
@@ -49,8 +52,8 @@ public class FoundReportActivity extends AppCompatActivity {
     public static final int IMAGE_REQ = 998;
     public ArrayList<ReportData> report = new ArrayList<>();
     public Bitmap bitmap;
-    boolean hasImage = false;
-    private Uri imagePath;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +94,6 @@ public class FoundReportActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ImageView imageView = findViewById(R.id.imageFromCamera);
-        imagePath = Uri.parse(TakePhotoActivity.imageFilePath);
         imageView.setImageURI(Uri.parse(TakePhotoActivity.imageFilePath));
 
         // get absolute path of image file (photofile)
@@ -101,7 +103,7 @@ public class FoundReportActivity extends AppCompatActivity {
         // new bytearray
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         // compress bitmap into bytearray
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
         // creating bytearray
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         // encode bytearray into base64
@@ -111,13 +113,13 @@ public class FoundReportActivity extends AppCompatActivity {
 
     } //end onactivityresult
 
-    public String convertBase64(Bitmap bitmap){
+/*    public String convertBase64(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
-    }
+    }*/
 
     public void submitForm(ArrayList<ReportData> report){
         Intent submit = new Intent(FoundReportActivity.this, ReportConfirmationActivity.class);
@@ -126,13 +128,18 @@ public class FoundReportActivity extends AppCompatActivity {
         descriptEditText = findViewById(R.id.descriptEditText);
         String description = descriptEditText.getText().toString();
 
-        //db: last_seen
+        //db: location
         locationEditText = findViewById(R.id.locationEditText);
         String location = locationEditText.getText().toString();
 
         //db: contact
         contactEditText = findViewById(R.id.contactEditText);
         String contact = contactEditText.getText().toString();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+         last_seen = simpleDateFormat.format(new Date());
+
+
 
         /*if(hasImage){
             TextView testText = findViewById(R.id.bmpTest);
@@ -165,11 +172,11 @@ public class FoundReportActivity extends AppCompatActivity {
         HashMap<String,String> params = new HashMap<>();
         params.put("owner", defaultOwner);
         params.put("pet_name", defaultPetName);
-        params.put("last_seen", location);
+        params.put("last_seen", last_seen);
         params.put("contact", contact);
         params.put("description", description);
         params.put("photo", encoded);
-        params.put("location", defaultLocation);
+        params.put("location", location);
         // Call api to create report
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_REPORT,params,CODE_POST_REQUEST);
         request.execute();
