@@ -90,7 +90,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.setMinZoomPreference(15);
+        mMap.setMinZoomPreference(16);
 
         CreateSampleMarker(lostPetMarker);
 
@@ -109,35 +109,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         foundReports.add(testReport4);
 
         //PopulateReportMap(foundReports);
-
-
-        /*        try {
-            jsonReports = GetReports();
-        } catch (IOException e)
-        {
-            //handle the exception
-            e.printStackTrace();
-            System.out.println("IOException from MapsActivity (line 117)");
-        } finally {
-            for(int i = 0; i < jsonReports.size(); i++)
-            {
-                ReportData currentReport = jsonReports.get(i);
-                System.out.println("Report " + Integer.toString(i));
-                System.out.println("Owner: " + currentReport.getName());
-                System.out.println("Name: " + currentReport.getName());
-                System.out.println("Description: " + currentReport.getDescription());
-                System.out.println("Contact: " + currentReport.getContact());
-                System.out.println("Last Seen: " + currentReport.getReportDate());
-                System.out.println("Tags: " + currentReport.getTags());
-                System.out.println("Location: " + currentReport.getLocation());
-                System.out.println("Latitude: " + currentReport.getLatitude());
-                System.out.println("Longitude: " + currentReport.getLongitude());
-                System.out.println("Image: " + currentReport.getImage());
-                System.out.println();
-            }
-
-            PopulateMapFromJson(jsonReports);
-        }*/
 
         new ReportGetter(this).execute();
 
@@ -270,42 +241,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //m.showInfoWindow();
     }
 
-    public static ArrayList<ReportData> GetReports() throws IOException
-    {
-        ArrayList<ReportData> reportsFromJson= new ArrayList<>();
-
-        //URL to access report data in JSON format
-        URL url = new URL("http://wherearfthou.duckdns.org/wherearf/db/v1/Api.php?apicall=getreports");
-
-        URLConnection request = url.openConnection();
-        request.connect();
-
-        JsonParser jp = new JsonParser();
-        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
-
-        if (root instanceof JsonObject) {
-            JsonObject jobject = root.getAsJsonObject();
-            JsonArray jarray = jobject.get("reports").getAsJsonArray();
-
-            for(int i = 0; i < jarray.size(); i++)
-            {
-                JsonObject currentJsonObject = jarray.get(i).getAsJsonObject();
-
-                if(currentJsonObject.isJsonNull() != true)
-                {
-                    ReportData currentReport = new ReportData();
-                    currentReport.setName(getNullAsEmptyString(currentJsonObject.get("pet_name")));
-                    currentReport.setImage(getNullAsEmptyString(currentJsonObject.get("photo")));
-                    currentReport.setLocation(getNullAsEmptyString(currentJsonObject.get("location")));
-                    currentReport.setReportDate(getNullAsEmptyString(currentJsonObject.get("last_seen")));
-                    reportsFromJson.add(currentReport);
-                }
-            }
-        }
-
-        return reportsFromJson;
-    }
-
     public static String getNullAsEmptyString(JsonElement jsonElement) {
         if(jsonElement.isJsonNull())
             return "";
@@ -313,22 +248,4 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             return jsonElement.getAsString();
     }
 
-    public void PopulateMapFromJson(ArrayList<ReportData> reports)
-    {
-        for(int i = 0; i < reports.size(); i++)
-        {
-            ReportData currentReport = reports.get(i);
-            double latitude = .01;
-            double longitude = .01;
-            currentReport.setLatitude(36.888014 + latitude*i);
-            currentReport.setLongitude(-76.304157 + longitude*i);
-            currentReport.setImage("lost_dog");
-
-            Marker currentMarker = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(currentReport.getLatitude(), currentReport.getLongitude()))
-                    .title("Lost Pet Sighting"));
-            currentMarker.setTag(currentReport);
-
-        }
-    }
 }//end of class
