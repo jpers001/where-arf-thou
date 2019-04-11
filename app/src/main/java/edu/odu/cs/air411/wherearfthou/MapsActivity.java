@@ -163,8 +163,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
                 Marker currentMarker = mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(loopData.getLatitude(), loopData.getLongitude()))
-                        .title("Lost Pet Sighting")
-                        .icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(image, 150, 150, true))));
+                        .title("Lost Pet Sighting"));
+                        //.icon(BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(image, 150, 150, true))));
                 currentMarker.setTag(loopData);
             }
         }//end of for loop
