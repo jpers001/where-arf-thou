@@ -55,5 +55,6 @@
     <string name="register_bn_label">Register</string>
     <string name="sign_up_text">New user? Sign Up</string>
     <string name="onClick">onClick</string>
+    <string name="edit_tag_hint">Tap to enter a tag...</string>
 
 </resources>

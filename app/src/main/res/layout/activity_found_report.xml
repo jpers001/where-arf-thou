@@ -9,6 +9,19 @@
     android:background="@drawable/white_bg"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageFromCamera"
+        android:layout_width="243dp"
+        android:layout_height="208dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/wat_icon"
+        app:layout_constraintBottom_toTopOf="@+id/addPhotoImgBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <ImageButton
         android:id="@+id/addPhotoImgBtn"
         android:layout_width="wrap_content"
@@ -20,10 +33,10 @@
         android:contentDescription="@string/content_description_photo_add_found"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.849"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07"
+        app:layout_constraintVertical_bias="0.331"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <TextView
@@ -41,10 +54,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.017"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.250" />
+        app:layout_constraintVertical_bias="0.439" />
 
     <EditText
         android:id="@+id/descriptEditText"
@@ -58,13 +71,12 @@
         android:hint="@string/edit_found_description"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textSize="50px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0.029"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.295"
-        android:textSize="50px"
         tools:targetApi="o" />
 
     <TextView
@@ -82,15 +94,15 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".390" />
+        app:layout_constraintVertical_bias="0.814" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="27dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -98,10 +110,10 @@
         android:contentDescription="@string/tag_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintHorizontal_bias="0.754"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.390"
+        app:layout_constraintVertical_bias="0.815"
         app:srcCompat="@drawable/tag_icon" />
 
     <TextView
@@ -119,10 +131,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.48" />
+        app:layout_constraintVertical_bias="0.57" />
 
     <EditText
         android:id="@+id/locationEditText"
@@ -136,13 +148,13 @@
         android:hint="@string/edit_location"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textSize="50px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.535"
-        android:textSize="50px"
+        app:layout_constraintVertical_bias="0.639"
         tools:targetApi="o" />
 
     <ImageButton
@@ -156,10 +168,10 @@
         android:contentDescription="@string/gps_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHorizontal_bias="0.988"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.535"
+        app:layout_constraintVertical_bias="0.634"
         app:srcCompat="@drawable/gps_icon" />
 
     <TextView
@@ -177,10 +189,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.021"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.620" />
+        app:layout_constraintVertical_bias="0.702" />
 
     <EditText
         android:id="@+id/contactEditText"
@@ -194,13 +206,13 @@
         android:hint="@string/edit_found_contact"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textSize="50px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68"
-        android:textSize="50px"
+        app:layout_constraintVertical_bias="0.755"
         tools:targetApi="o" />
 
     <Button
@@ -223,18 +235,19 @@
         app:layout_constraintVertical_bias="1.0"
         tools:text="SUBMIT" />
 
-    <ImageView
-        android:id="@+id/imageFromCamera"
-        android:layout_width="136dp"
-        android:layout_height="122dp"
-        android:layout_marginStart="137dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="138dp"
-        android:layout_marginBottom="588dp"
-        android:contentDescription="@string/wat_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <EditText
+        android:id="@+id/tagEditTextFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="70dp"
+        android:ems="10"
+        android:hint="@string/edit_tag_hint"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/submitBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/contactEditText" />
 
 </android.support.constraint.ConstraintLayout>
