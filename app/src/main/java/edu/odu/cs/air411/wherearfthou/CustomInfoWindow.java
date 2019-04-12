@@ -34,28 +34,18 @@ public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
         View view = ((Activity)context).getLayoutInflater()
                 .inflate(R.layout.maps_infowindow, null);
 
+        ReportData reportWindowData = (ReportData) marker.getTag();
+
+        //Set Report Window Title
         TextView name_tv = view.findViewById(R.id.name);
-        TextView details_tv = view.findViewById(R.id.details);
-        ImageView img = view.findViewById(R.id.pic);
-
-        TextView ownerName_tv = view.findViewById(R.id.ownerName);
-        TextView description_tv = view.findViewById(R.id.description);
-        TextView tags_tv = view.findViewById(R.id.tags);
-        TextView contactInfo_tv = view.findViewById(R.id.contactInfo);
-        TextView lastSeen_tv = view.findViewById(R.id.lastSeen);
-
         name_tv.setText(marker.getTitle());
+
+        //Set Details (currently nothing?)
+        TextView details_tv = view.findViewById(R.id.details);
         details_tv.setText(marker.getSnippet());
 
-
-        ReportData reportWindowData = (ReportData) marker.getTag();
-        ownerName_tv.setText("Pet Name: " + reportWindowData.getName());
-        lastSeen_tv.setText("Last Seen: " + reportWindowData.getReportDate());
-
-        int imageId = context.getResources().getIdentifier(reportWindowData.getImage().toLowerCase(),
-                "drawable", context.getPackageName());
-        //img.setImageResource(imageId);
-
+        //Set the Image
+        ImageView img = view.findViewById(R.id.pic);
         if(reportWindowData.getImage() != "") {
             byte[] decodedString = Base64.decode(reportWindowData.getImage(), Base64.DEFAULT);
             Bitmap image = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -67,8 +57,20 @@ public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
             Bitmap image = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             img.setImageBitmap(createScaledBitmap(image, 600, 600, true));
         }
+
+        //Set Owner Name, if there is one
+        TextView ownerName_tv = view.findViewById(R.id.ownerName);
+        if(reportWindowData.getName() != "" && reportWindowData.getName() != null)
+        {
+            ownerName_tv.setText("Pet Name: " + reportWindowData.getName());
+        }
+
+        //Set the description (from json)
+        TextView description_tv = view.findViewById(R.id.description);
         description_tv.setText("Description: " + reportWindowData.getDescription());
 
+        //Set the tags
+        TextView tags_tv = view.findViewById(R.id.tags);
         ArrayList<String> arrList = reportWindowData.getTags();
         String arrString = "Tags: ";
 
@@ -82,8 +84,17 @@ public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
         }
 
         tags_tv.setText(arrString);
+
+        //Set the Contact Info
+        TextView contactInfo_tv = view.findViewById(R.id.contactInfo);
         contactInfo_tv.setText("Contact: " + reportWindowData.getContact());
+
+        //Set Last Seen date/time
+        TextView lastSeen_tv = view.findViewById(R.id.lastSeen);
+        lastSeen_tv.setText("Last Seen: " + reportWindowData.getReportDate());
+
 
         return view;
     }
+
 }
