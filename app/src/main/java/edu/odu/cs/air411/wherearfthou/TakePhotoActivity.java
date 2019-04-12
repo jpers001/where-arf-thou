@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import static android.graphics.Bitmap.createScaledBitmap;
-
 public class TakePhotoActivity extends AppCompatActivity {
 
     //private Button captureFront;
@@ -54,7 +52,6 @@ public class TakePhotoActivity extends AppCompatActivity {
         /** Trying out new method */
         setContentView(R.layout.activity_take_photo);
 
-        createScaledBitmap(imageBitmap, 24, 53, true);
         //captureFront = findViewById(R.id.captureFront);
         imageView = findViewById(R.id.imageView2);
 
