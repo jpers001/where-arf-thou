@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -91,31 +93,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
         }
 
-
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setMinZoomPreference(16);
 
-        CreateSampleMarker(lostPetMarker);
-
-        ArrayList<ReportData> foundReports = new ArrayList<>();
-
-        ReportData testReport = new ReportData("Dog running around ODU's campus", "Old Dominion University", "757-141-3422", false);
-        foundReports.add(testReport);
-
-        ReportData testReport2 = new ReportData("Dog hiding in the bushes near the Ted", "Ted Constant Convocation Center", "757-163-2422", false);
-        foundReports.add(testReport2);
-
-        ReportData testReport3 = new ReportData("Brown cat walking down the sidewalk", "1400 Melrose Pkwy", "N/A", true);
-        foundReports.add(testReport3);
-
-        ReportData testReport4 = new ReportData("Black cat sitting on a rock near W 49th St", "1416 W 49th Street, Norfolk Virginia", "catfinder@gmail.com", false);
-        foundReports.add(testReport4);
-
-        //PopulateReportMap(foundReports);
+        CustomInfoWindow customInfoWindow = new CustomInfoWindow(this);
+        mMap.setInfoWindowAdapter(customInfoWindow);
 
         new ReportGetter(this).execute();
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(lostPetMarker));
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                final LatLng newLatLng = new LatLng(marker.getPosition().latitude + .004, marker.getPosition().longitude);
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(newLatLng));
+                marker.showInfoWindow();
+                return true;
+            }
+        });
     }
 
     public void onReportGetterCompleted(ArrayList<ReportData> reports)
@@ -170,74 +166,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onReportGetterError(String error)
     {
         System.out.println(error);
-    }
-
-    public void PopulateReportMap(ArrayList<ReportData> reports) {
-        for (int i = 0; i < reports.size(); i++) {
-
-            if (reports.size() == 0)
-                break;
-
-            List<Address> addressList = new ArrayList<>();
-            Geocoder geocoder = new Geocoder(this);
-
-            ReportData loopData = reports.get(i);
-
-            if (loopData.isFound() == false) {
-                loopData.setImage("lost_dog");// + Integer.toString(i));
-                try {
-                    addressList = geocoder.getFromLocationName(loopData.getLocation(), 1);
-                } catch (IOException e) {
-                    Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT)
-                            .show();
-                    e.printStackTrace();
-
-                } finally {
-                    Address address = addressList.get(0);
-
-                    if (address.hasLatitude() && address.hasLongitude()) {
-                        loopData.setLatitude(address.getLatitude());
-                        loopData.setLongitude(address.getLongitude());
-                    }
-                }
-
-                Marker currentMarker = mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(loopData.getLatitude(), loopData.getLongitude()))
-                        .title("Lost Pet Sighting"));
-                currentMarker.setTag(loopData);
-            }
-        }//end of for loop
-    }//end of PopulateReportMap
-
-    public void CreateSampleMarker(LatLng lostPetMarker)
-    {
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(lostPetMarker)
-                .title("Lost Pet Sighting")
-                .snippet("Near 48th Street and Hampton Blvd")
-                //.icon(BitmapDescriptorFactory.defaultMarker( BitmapDescriptorFactory.HUE_BLUE));
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.dog_icon));
-        ReportData report = new ReportData();
-        report.setImage("lost_dog");
-        report.setDescription("Saw this white dog roaming with no collar");
-
-        ArrayList<String> tagSample = new ArrayList<String>(Arrays.asList("white", "dog", "small", "no collar"));
-        report.setTags(tagSample);
-        //info.setContactInfo("Contact me if you have any info at: 123-456-7890");
-
-        CustomInfoWindow customInfoWindow = new CustomInfoWindow(this);
-        mMap.setInfoWindowAdapter(customInfoWindow);
-
-        Marker m = mMap.addMarker(markerOptions);
-        m.setTag(report);
-        //m.showInfoWindow();
-    }
-
-    public static String getNullAsEmptyString(JsonElement jsonElement) {
-        if(jsonElement.isJsonNull())
-            return "";
-        else
-            return jsonElement.getAsString();
     }
 
 }//end of class
