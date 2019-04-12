@@ -123,9 +123,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         for (int i = 0; i < reports.size(); i++) {
 
-            if (reports.size() == 0)
-                break;
-
             List<Address> addressList = new ArrayList<>();
             Geocoder geocoder = new Geocoder(this);
 

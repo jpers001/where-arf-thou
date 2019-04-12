@@ -47,6 +47,8 @@
     <string name="last_seen">Last Seen</string>
     <string name="contact">Contact</string>
     <string name="description">Description</string>
+    <string name="ownerName">Owner Name</string>
+    <string name="lastSeen">Last Seen</string>
     <string name="prompt_username">User Name</string>
     <string name="prompt_name">Name</string>
     <string name="prompt_password">Password</string>
