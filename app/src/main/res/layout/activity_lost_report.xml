@@ -10,28 +10,28 @@
 
     <ImageButton
         android:id="@+id/tagImgBtn2"
+        android:layout_width="25dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="57dp"
-        android:layout_marginEnd="92dp"
-        android:layout_marginBottom="112dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tagEditTextLost"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.872"
         app:srcCompat="@drawable/tag_icon" />
 
     <ImageView
         android:id="@+id/imageFromCamera"
-        android:background="@android:color/transparent"
         android:layout_width="243dp"
         android:layout_height="208dp"
         android:layout_marginTop="37dp"
         android:layout_marginBottom="20dp"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/wat_icon"
         app:layout_constraintBottom_toTopOf="@+id/addPhotoImgBtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,13 +41,13 @@
 
     <ImageButton
         android:id="@+id/addPhotoImgBtn"
-        android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/content_description_photo_add_lost"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -203,15 +203,15 @@
     <ImageButton
         android:id="@+id/lostReportLocationBtn"
         android:layout_width="19dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="56dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/gps_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.668"
+        app:layout_constraintVertical_bias="0.666"
         app:srcCompat="@drawable/gps_icon" />
 
     <TextView
@@ -278,15 +278,19 @@
         android:id="@+id/tagEditTextLost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="39dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/edit_tag_hint"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/submitBtn2"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.87" />
 
 
 </android.support.constraint.ConstraintLayout>
