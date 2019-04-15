@@ -20,6 +20,15 @@ AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
+        {
+            android.support.v7.app.ActionBar actionBar = getSupportActionBar(); // or getActionBar();
+            String title = actionBar.getTitle().toString(); // get the title
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setLogo(R.drawable.ic_wat_icon);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         Name=(EditText)findViewById(R.id.reg_name);

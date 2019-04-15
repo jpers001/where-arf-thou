@@ -53,6 +53,7 @@
     <string name="prompt_name">Name</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_con_password">Confirm Password</string>
+    <string name="lostReportLocationBtn">Lost Report Location Button</string>
     <string name="login_bn_label">Login</string>
     <string name="register_bn_label">Register</string>
     <string name="sign_up_text">New user? Sign Up</string>
