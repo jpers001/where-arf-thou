@@ -17,6 +17,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.maps.model.LatLng;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,6 +34,7 @@ import helper.RequestHandler;
 
 public class LostReportActivity extends AppCompatActivity {
 
+    public static final int PICK_MAP_POINT_REQUEST = 814;
     /**
      * New Additions.
      *   Changed entry of the EditTexts (so they're public)
@@ -101,6 +105,15 @@ public class LostReportActivity extends AppCompatActivity {
             }
         });
 
+        //Current GPS Location Button
+        ImageButton getLocationImgBtn = findViewById(R.id.lostReportLocationBtn);
+        getLocationImgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickLocationOnMap();
+            }
+        });
+
         {
             ActionBar actionBar = getSupportActionBar(); // or getActionBar();
             String title = actionBar.getTitle().toString(); // get the title
@@ -112,24 +125,34 @@ public class LostReportActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        ImageView imageView = findViewById(R.id.imageFromCamera);
-        imageView.setImageURI(Uri.parse(TakePhotoActivity.imageFilePath));
+        if(requestCode == PICK_MAP_POINT_REQUEST)
+        {
+            if (resultCode == RESULT_OK) {
+                LatLng latLng = (LatLng) data.getParcelableExtra("picked_point");
+                Toast.makeText(this, "Point Chosen: " + latLng.latitude + " " + latLng.longitude, Toast.LENGTH_LONG).show();
+            }
+        }
+        else {
 
-        // get absolute path of image file (photofile)
-        String filePath = TakePhotoActivity.photoFile.getAbsolutePath();
-        // create bitmap of photofile
-        bitmap = BitmapFactory.decodeFile(filePath);
-        // new bytearray
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        // compress bitmap into bytearray
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
-        // creating bytearray
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        // encode bytearray into base64
-        encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        bitmap = null;
-        byteArray = null;
+            super.onActivityResult(requestCode, resultCode, data);
+            ImageView imageView = findViewById(R.id.imageFromCamera);
+            imageView.setImageURI(Uri.parse(TakePhotoActivity.imageFilePath));
+
+            // get absolute path of image file (photofile)
+            String filePath = TakePhotoActivity.photoFile.getAbsolutePath();
+            // create bitmap of photofile
+            bitmap = BitmapFactory.decodeFile(filePath);
+            // new bytearray
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            // compress bitmap into bytearray
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
+            // creating bytearray
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+            // encode bytearray into base64
+            encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            bitmap = null;
+            byteArray = null;
+        }
     } //end onactivityresult
 
     public void submitForm(ArrayList<ReportData> report){
@@ -262,6 +285,10 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     }
 } //end PerformNetworkReuest
 
+    private void pickLocationOnMap(){
+        Intent pickPointIntent = new Intent(this, MapForCoordinateSelection.class);
+        startActivityForResult(pickPointIntent, PICK_MAP_POINT_REQUEST);
+    }
 
 
 } //end LostReportActivity
