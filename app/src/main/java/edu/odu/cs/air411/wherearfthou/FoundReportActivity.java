@@ -86,17 +86,17 @@ public class FoundReportActivity extends AppCompatActivity {
         tagImgBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if(tagEditTextFound.getText().toString().length() >= 3)
-                {
-                    tagData.add(tagEditTextFound.getText().toString());
-                    tagEditTextFound.setText("");
-                }
-                else if(tagData.size() >= 10)
+                if(tagData.size() >= 10)
                 {
                     Toast toast = Toast.makeText(getApplicationContext(),"Maximum tags allowed: " + tagData.size(), Toast.LENGTH_SHORT);
                     toast.show();
                 }
-                else{
+                else if(tagEditTextFound.getText().toString().length() >= 3)
+                {
+                    tagData.add(tagEditTextFound.getText().toString());
+                    tagEditTextFound.setText("");
+                }
+                else if(tagEditTextFound.getText().toString().length() <= 3){
                     Toast toast = Toast.makeText(getApplicationContext(),"Tags must be at least 3 characters.",Toast.LENGTH_SHORT);
                     toast.show();
                 }

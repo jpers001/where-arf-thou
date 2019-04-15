@@ -84,17 +84,17 @@ public class LostReportActivity extends AppCompatActivity {
         tagImgBtn2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if(tagEditTextLost.getText().toString().length() >= 3)
-                {
-                    tagData.add(tagEditTextLost.getText().toString());
-                    tagEditTextLost.setText("");
-                }
-                else if(tagData.size() >= 10)
+                if(tagData.size() >= 10)
                 {
                     Toast toast = Toast.makeText(getApplicationContext(),"Maximum tags allowed: " + tagData.size(), Toast.LENGTH_SHORT);
                     toast.show();
                 }
-                else{
+                else if(tagEditTextLost.getText().toString().length() >= 3)
+                {
+                    tagData.add(tagEditTextLost.getText().toString());
+                    tagEditTextLost.setText("");
+                }
+                else if (tagEditTextLost.getText().toString().length() <= 3){
                     Toast toast = Toast.makeText(getApplicationContext(),"Tags must be at least 3 characters.", Toast.LENGTH_SHORT);
                     toast.show();
                 }
