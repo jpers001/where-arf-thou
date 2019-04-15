@@ -85,7 +85,7 @@ public class ReportData implements Serializable {
         contact = "555-555-5555";
     }
 
-    ReportData(String description, String location, String contact, boolean isFound){
+    ReportData(String description, String location, String contact, boolean isFound, ArrayList<String> tags){
         this.name = "N/A";
         this.description = description;
         this.location = location;
@@ -93,9 +93,10 @@ public class ReportData implements Serializable {
         this.longitude = 0.00;
         this.contact = contact;
         this.isFound = isFound;
+        this.tags = tags;
     }
 
-    ReportData(String name, String description, String location, String contact, boolean isFound){
+    ReportData(String name, String description, String location, String contact, boolean isFound, ArrayList<String> tags){
         this.name = name;
         this.description = description;
         this.location = location;
@@ -103,6 +104,7 @@ public class ReportData implements Serializable {
         this.longitude = 0.00;
         this.contact = contact;
         this.isFound = isFound;
+        this.tags = tags;
     }
 
     public String getImage() {

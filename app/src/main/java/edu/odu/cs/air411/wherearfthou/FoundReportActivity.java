@@ -39,7 +39,7 @@ public class FoundReportActivity extends AppCompatActivity {
      *   default info: petname, ownername - hardcoded as Unknown
      */
 
-    EditText descriptEditText, locationEditText, contactEditText;
+    EditText descriptEditText, locationEditText, contactEditText, tagEditTextFound;
     String defaultOwner = "Unknown";
     String defaultPetName = "Unknown";
     String defaultLocation = "Unknown";
@@ -52,6 +52,7 @@ public class FoundReportActivity extends AppCompatActivity {
 
     public static final int IMAGE_REQ = 998;
     public ArrayList<ReportData> report = new ArrayList<>();
+    public ArrayList<String> tagData = new ArrayList<>();
     public Bitmap bitmap;
 
 
@@ -81,10 +82,24 @@ public class FoundReportActivity extends AppCompatActivity {
 
         //Add tag button
         ImageButton tagImgBtn = findViewById(R.id.tagImgBtn);
+        tagEditTextFound = findViewById(R.id.tagEditTextFound);
         tagImgBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //TODO: Add code to remove text from tag text box and place inside ArrayList
+                if(tagEditTextFound.getText().toString().length() >= 3)
+                {
+                    tagData.add(tagEditTextFound.getText().toString());
+                    tagEditTextFound.setText("");
+                }
+                else if(tagData.size() >= 10)
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(),"Maximum tags allowed: " + tagData.size(), Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else{
+                    Toast toast = Toast.makeText(getApplicationContext(),"Tags must be at least 3 characters.",Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
 
@@ -144,6 +159,20 @@ public class FoundReportActivity extends AppCompatActivity {
         contactEditText = findViewById(R.id.contactEditText);
         String contact = contactEditText.getText().toString();
 
+        /*
+        //JUST IN CASE IT'S NEEDED
+
+        String tags = "";
+        for(int i = 0; i < tagData.size(); i++){
+            if(i == tagData.size() - 1){
+                tags += tagData.get(i);
+            }
+            else{
+                tags += tagData.get(i) + ", ";
+            }
+        }
+         */
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
          last_seen = simpleDateFormat.format(new Date());
 
@@ -158,8 +187,9 @@ public class FoundReportActivity extends AppCompatActivity {
 
         /**
          * QUERY: What is the below stuff used for? Do we need this anymore?
+         * -> It's used for the confirmation page
          */
-        ReportData entry = new ReportData(description, location, contact, true);
+        ReportData entry = new ReportData(description, location, contact, true, tagData);
         entry.setPhotoUri(TakePhotoActivity.imageFilePath);
         report.add(entry);
 
@@ -185,6 +215,7 @@ public class FoundReportActivity extends AppCompatActivity {
         params.put("description", description);
         params.put("photo", encoded);
         params.put("location", location);
+        //TODO: Add tags to DB
         // Call api to create report
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_REPORT,params,CODE_POST_REQUEST);
         request.execute();

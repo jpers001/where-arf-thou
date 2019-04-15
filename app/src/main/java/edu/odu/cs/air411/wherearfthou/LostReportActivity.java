@@ -38,7 +38,7 @@ public class LostReportActivity extends AppCompatActivity {
      *
      *   defaultOwner: I assume the Owner of the pet will be the user? I have hardcoded the name for now.
      */
-    EditText nameEditText, descriptEditText2, lastSeenEditText, contactEditText, locationEditText;
+    EditText nameEditText, descriptEditText2, lastSeenEditText, contactEditText, locationEditText, tagEditTextLost;
     String defaultOwner = "WhereArfThou"; //should be userName later.
     String defaultLocation = "N/A";
     String encoded = "N/A";
@@ -52,6 +52,7 @@ public class LostReportActivity extends AppCompatActivity {
 
     public static final int IMAGE_REQ = 997;
     public ArrayList<ReportData> report = new ArrayList<>();
+    public ArrayList<String> tagData = new ArrayList<>();
     public Bitmap bitmap;
 
     @Override
@@ -73,10 +74,33 @@ public class LostReportActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openTakePhotoActivity = new Intent(LostReportActivity.this, TakePhotoActivity.class);
                 startActivityForResult(openTakePhotoActivity, IMAGE_REQ);
-
             }
 
         });
+
+        //Add Tag button
+        ImageButton tagImgBtn2 = findViewById(R.id.tagImgBtn2);
+        tagEditTextLost = findViewById(R.id.tagEditTextLost);
+        tagImgBtn2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(tagEditTextLost.getText().toString().length() >= 3)
+                {
+                    tagData.add(tagEditTextLost.getText().toString());
+                    tagEditTextLost.setText("");
+                }
+                else if(tagData.size() >= 10)
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(),"Maximum tags allowed: " + tagData.size(), Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else{
+                    Toast toast = Toast.makeText(getApplicationContext(),"Tags must be at least 3 characters.", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        });
+
         {
             ActionBar actionBar = getSupportActionBar(); // or getActionBar();
             String title = actionBar.getTitle().toString(); // get the title
@@ -133,8 +157,9 @@ public class LostReportActivity extends AppCompatActivity {
 
         /**
          * QUERY: What is the below stuff used for? Do we need this anymore?
+         * -> It's used for the confirmation page
          */
-        ReportData entry = new ReportData(name, description, location, contact, false);
+        ReportData entry = new ReportData(name, description, location, contact, false, tagData);
         entry.setPhotoUri(TakePhotoActivity.imageFilePath);
         report.add(entry);
 
@@ -159,6 +184,7 @@ public class LostReportActivity extends AppCompatActivity {
         params.put("description", description);
         params.put("photo", encoded);
         params.put("location", location);
+        //TODO: Add tags to DB
         // Call api to create report
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_REPORT,params,CODE_POST_REQUEST);
         request.execute();
