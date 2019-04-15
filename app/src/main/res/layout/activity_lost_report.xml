@@ -8,6 +8,22 @@
     android:background="@drawable/white_bg"
     tools:context=".MainActivity">
 
+    <ImageButton
+        android:id="@+id/tagImgBtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="112dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tagEditTextLost"
+        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/tag_icon" />
+
     <ImageView
         android:id="@+id/imageFromCamera"
         android:layout_width="243dp"
@@ -97,21 +113,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.818" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="24dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="122dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@string/tag_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tagEditTextLost"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.819"
-        app:srcCompat="@drawable/tag_icon" />
 
     <TextView
         android:id="@+id/textView10"
@@ -278,14 +279,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginEnd="17dp"
         android:layout_marginBottom="39dp"
         android:ems="10"
         android:hint="@string/edit_tag_hint"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/submitBtn2"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
-        app:layout_constraintHorizontal_bias="0.072"
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/editText3"
         app:layout_constraintVertical_bias="0.0" />

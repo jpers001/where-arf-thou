@@ -13,7 +13,6 @@ public class ReportData implements Serializable {
     private double longitude;
     private String contact;
     private String reportDate;
-    /*private String tags;*/
     private ArrayList<String> tags = new ArrayList<>();
     // true = found report, false = lost report
     private boolean isFound;

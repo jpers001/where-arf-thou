@@ -45,6 +45,7 @@ public class FoundReportActivity extends AppCompatActivity {
     String defaultLocation = "Unknown";
     String encoded = "N/A"; //default
     String last_seen = "NoDate";
+    String defaultTags = "None";
 
     public static final int CODE_POST_REQUEST = 1025;
     public static final int CODE_GET_REQUEST = 1024;
@@ -52,7 +53,6 @@ public class FoundReportActivity extends AppCompatActivity {
     public static final int IMAGE_REQ = 998;
     public ArrayList<ReportData> report = new ArrayList<>();
     public Bitmap bitmap;
-    public ArrayList<String> tagData = new ArrayList<>();
 
 
     @Override
@@ -60,7 +60,7 @@ public class FoundReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_found_report);
 
-
+        //Submit Button
         Button submitBtn = findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,14 +69,22 @@ public class FoundReportActivity extends AppCompatActivity {
             }
         });
 
-
-
+        //Photo Button
         ImageButton addPhotoImgBtn = findViewById(R.id.addPhotoImgBtn);
         addPhotoImgBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent openTakePhotoActivity = new Intent(FoundReportActivity.this, TakePhotoActivity.class);
                 startActivityForResult(openTakePhotoActivity, IMAGE_REQ);
+            }
+        });
+
+        //Add tag button
+        ImageButton tagImgBtn = findViewById(R.id.tagImgBtn);
+        tagImgBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //TODO: Add code to remove text from tag text box and place inside ArrayList
             }
         });
 
