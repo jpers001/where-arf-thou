@@ -24,6 +24,7 @@
 
     <ImageButton
         android:id="@+id/addPhotoImgBtn"
+        android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -142,6 +143,7 @@
 
     <ImageButton
         android:id="@+id/currentLocationBtn"
+        android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -235,6 +237,7 @@
 
     <ImageButton
         android:id="@+id/tagImgBtn"
+        android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="91dp"

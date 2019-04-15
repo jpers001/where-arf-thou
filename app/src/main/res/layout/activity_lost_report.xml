@@ -10,6 +10,7 @@
 
     <ImageButton
         android:id="@+id/tagImgBtn2"
+        android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
@@ -26,6 +27,7 @@
 
     <ImageView
         android:id="@+id/imageFromCamera"
+        android:background="@android:color/transparent"
         android:layout_width="243dp"
         android:layout_height="208dp"
         android:layout_marginTop="37dp"
