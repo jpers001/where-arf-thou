@@ -52,7 +52,6 @@ public class TakePhotoActivity extends AppCompatActivity {
         /** Trying out new method */
         setContentView(R.layout.activity_take_photo);
 
-
         //captureFront = findViewById(R.id.captureFront);
         imageView = findViewById(R.id.imageView2);
 

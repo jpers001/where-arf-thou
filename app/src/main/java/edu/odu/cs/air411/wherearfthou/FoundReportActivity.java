@@ -52,7 +52,7 @@ public class FoundReportActivity extends AppCompatActivity {
     public static final int IMAGE_REQ = 998;
     public ArrayList<ReportData> report = new ArrayList<>();
     public Bitmap bitmap;
-
+    public ArrayList<String> tagData = new ArrayList<>();
 
 
     @Override
