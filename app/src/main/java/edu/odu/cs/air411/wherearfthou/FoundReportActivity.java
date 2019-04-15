@@ -55,7 +55,6 @@ public class FoundReportActivity extends AppCompatActivity {
     String defaultLocation = "Unknown";
     String encoded = "N/A"; //default
     String last_seen = "NoDate";
-    String defaultTags = "None";
 
     public static final int CODE_POST_REQUEST = 1025;
     public static final int CODE_GET_REQUEST = 1024;
@@ -205,9 +204,6 @@ public class FoundReportActivity extends AppCompatActivity {
         contactEditText = findViewById(R.id.contactEditText);
         String contact = contactEditText.getText().toString();
 
-        /*
-        //JUST IN CASE IT'S NEEDED
-
         String tags = "";
         for(int i = 0; i < tagData.size(); i++){
             if(i == tagData.size() - 1){
@@ -217,7 +213,7 @@ public class FoundReportActivity extends AppCompatActivity {
                 tags += tagData.get(i) + ", ";
             }
         }
-         */
+
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
          last_seen = simpleDateFormat.format(new Date());
@@ -261,7 +257,7 @@ public class FoundReportActivity extends AppCompatActivity {
         params.put("description", description);
         params.put("photo", encoded);
         params.put("location", location);
-        //TODO: Add tags to DB
+        params.put("tag", tags);
         // Call api to create report
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_REPORT,params,CODE_POST_REQUEST);
         request.execute();
