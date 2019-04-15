@@ -1,7 +1,9 @@
 package edu.odu.cs.air411.wherearfthou;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -95,6 +97,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setMinZoomPreference(16);
+        //mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
 
         CustomInfoWindow customInfoWindow = new CustomInfoWindow(this);
         mMap.setInfoWindowAdapter(customInfoWindow);
@@ -106,12 +110,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                ///TODO: A proper method of zooming, currently it's a rough implementation and doesn't work if the
+                ///TODO: user zooms in, or if the info window is very tall (or very short)
+
                 final LatLng newLatLng = new LatLng(marker.getPosition().latitude + .004, marker.getPosition().longitude);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(newLatLng));
                 marker.showInfoWindow();
                 return true;
             }
         });
+
     }
 
     public void onReportGetterCompleted(ArrayList<ReportData> reports)
