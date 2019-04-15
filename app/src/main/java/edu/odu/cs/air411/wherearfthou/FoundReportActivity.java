@@ -3,6 +3,8 @@ package edu.odu.cs.air411.wherearfthou;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,19 +17,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 import helper.Api;
 import helper.RequestHandler;
+
+import static edu.odu.cs.air411.wherearfthou.LostReportActivity.PICK_MAP_POINT_REQUEST;
 
 public class FoundReportActivity extends AppCompatActivity {
 
@@ -103,37 +113,73 @@ public class FoundReportActivity extends AppCompatActivity {
             }
         });
 
-        {
-            ActionBar actionBar = getSupportActionBar(); // or getActionBar();
-            String title = actionBar.getTitle().toString(); // get the title
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setLogo(R.drawable.ic_wat_icon);
-            getSupportActionBar().setDisplayUseLogoEnabled(true);
-        }
+        //Report location selection button
+        ImageButton getLocationImgBtn = findViewById(R.id.currentLocationBtn);
+        getLocationImgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickLocationOnMap();
+            }
+        });
+
+
+
+        ActionBar actionBar = getSupportActionBar(); // or getActionBar();
+        String title = actionBar.getTitle().toString(); // get the title
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_wat_icon);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        ImageView imageView = findViewById(R.id.imageFromCamera);
-        imageView.setImageURI(Uri.parse(TakePhotoActivity.imageFilePath));
+        if(requestCode == PICK_MAP_POINT_REQUEST)
+        {
+            if (resultCode == RESULT_OK) {
+                LatLng latLng = (LatLng) data.getParcelableExtra("picked_point");
+                Geocoder geocoder;
+                List<Address> addresses;
+                geocoder = new Geocoder(this, Locale.getDefault());
+                String location = "";
+                try {
+                    addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                    if(addresses.size() != 0)
+                    {
+                        location = location + addresses.get(0).getAddressLine(0);// + addresses.get(0).getPostalCode();
+                    }
+                    TextView locationTV = findViewById(R.id.locationEditText);
+                    locationTV.setText(location);
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
+                Toast.makeText(this, "Point Chosen: " + latLng.latitude + " " + latLng.longitude, Toast.LENGTH_LONG).show();
+            }
+        }
+        else {
+            super.onActivityResult(requestCode, resultCode, data);
+            ImageView imageView = findViewById(R.id.imageFromCamera);
+            imageView.setImageURI(Uri.parse(TakePhotoActivity.imageFilePath));
 
-        // get absolute path of image file (photofile)
-        String filePath = TakePhotoActivity.photoFile.getAbsolutePath();
-        // create bitmap of photofile
-        bitmap = BitmapFactory.decodeFile(filePath);
-        // new bytearray
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        // compress bitmap into bytearray
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
-        // creating bytearray
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        // encode bytearray into base64
-        encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        bitmap = null;
-        byteArray = null;
-
+            // get absolute path of image file (photofile)
+            String filePath = TakePhotoActivity.photoFile.getAbsolutePath();
+            // create bitmap of photofile
+            bitmap = BitmapFactory.decodeFile(filePath);
+            // new bytearray
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            // compress bitmap into bytearray
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
+            // creating bytearray
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+            // encode bytearray into base64
+            encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            bitmap = null;
+            byteArray = null;
+        }
     } //end onactivityresult
 
 /*    public String convertBase64(Bitmap bitmap){
@@ -253,7 +299,6 @@ public class FoundReportActivity extends AppCompatActivity {
             //progressBar.setVisibility(View.VISIBLE);
             //Toast toast = Toast.makeText(getApplicationContext(),"PREExecute",Toast.LENGTH_SHORT);
             //toast.show();
-
         }
 
 
@@ -295,5 +340,9 @@ public class FoundReportActivity extends AppCompatActivity {
         }
     } //end PerformNetworkReuest
 
+    private void pickLocationOnMap(){
+        Intent pickPointIntent = new Intent(this, MapForCoordinateSelection.class);
+        startActivityForResult(pickPointIntent, PICK_MAP_POINT_REQUEST);
+    }
 
 } //end FoundReport

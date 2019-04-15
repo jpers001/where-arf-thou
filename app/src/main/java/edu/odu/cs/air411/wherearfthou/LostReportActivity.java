@@ -3,6 +3,8 @@ package edu.odu.cs.air411.wherearfthou;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -24,10 +27,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 import helper.Api;
 import helper.RequestHandler;
@@ -114,13 +120,13 @@ public class LostReportActivity extends AppCompatActivity {
             }
         });
 
-        {
-            ActionBar actionBar = getSupportActionBar(); // or getActionBar();
-            String title = actionBar.getTitle().toString(); // get the title
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setLogo(R.drawable.ic_wat_icon);
-            getSupportActionBar().setDisplayUseLogoEnabled(true);
-        }
+
+        ActionBar actionBar = getSupportActionBar(); // or getActionBar();
+        String title = actionBar.getTitle().toString(); // get the title
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_wat_icon);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
     }
 
     @Override
@@ -129,6 +135,23 @@ public class LostReportActivity extends AppCompatActivity {
         {
             if (resultCode == RESULT_OK) {
                 LatLng latLng = (LatLng) data.getParcelableExtra("picked_point");
+                Geocoder geocoder;
+                List<Address> addresses;
+                geocoder = new Geocoder(this, Locale.getDefault());
+                String location = "";
+                try {
+                    addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                    if(addresses.size() != 0)
+                    {
+                        location = location + addresses.get(0).getAddressLine(0);// + addresses.get(0).getPostalCode();
+                    }
+                    TextView lastSeenTV = findViewById(R.id.lastSeenLostReport);
+                    lastSeenTV.setText(location);
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
                 Toast.makeText(this, "Point Chosen: " + latLng.latitude + " " + latLng.longitude, Toast.LENGTH_LONG).show();
             }
         }
@@ -283,7 +306,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
         return null;
     }
-} //end PerformNetworkReuest
+} //end PerformNetworkRequest
 
     private void pickLocationOnMap(){
         Intent pickPointIntent = new Intent(this, MapForCoordinateSelection.class);
