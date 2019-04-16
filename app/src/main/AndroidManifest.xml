@@ -61,6 +61,7 @@
             android:name=".RegisterActivity"
             android:parentActivityName=".LoginActivity"/>
 
+
         <activity
             android:name=".MainActivity"/>
 

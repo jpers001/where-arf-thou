@@ -65,7 +65,7 @@
 
 
     <Button
-        android:id="@+id/viewReport"
+        android:id="@+id/logoutBtn"
         android:layout_width="190dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
@@ -73,7 +73,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/colorAccent"
-        android:text="View Reports"
+        android:text="Log Out"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

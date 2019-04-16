@@ -125,6 +125,8 @@
             android:textStyle="bold"
 
             />
+
+
     </RelativeLayout>
 
     <Button
@@ -132,6 +134,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SKIP" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Already have an account?"
+        android:textColor="@android:color/darker_gray" />
+    <Button
+        android:id="@+id/btnRegisterLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="#aaa"
+        android:text="Login"
+        android:textColor="@android:color/white" />
 
 
 </LinearLayout>

@@ -6,27 +6,43 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
-import static edu.odu.cs.air411.wherearfthou.R.drawable.tag_icon;
-import static edu.odu.cs.air411.wherearfthou.R.drawable.waticon;
+import helper.SessionHandler;
+import helper.User;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button button;
     private Button button2;
     private Button button3;
+    private Button logoutBtn;
+
+    private SessionHandler session;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
-
-
     {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        session = new SessionHandler(getApplicationContext());
+        User user = session.getUserDetails();
+
+        Toast toast = Toast.makeText(getApplicationContext(),"Welcome "+user.getFullName()+", your session will expire on "+user.getSessionExpiryDate(),Toast.LENGTH_LONG);
+        toast.show();
+
+        logoutBtn = findViewById(R.id.logoutBtn);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                session.logoutUser();
+                Intent i =new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener()
@@ -59,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
 
 
         {
