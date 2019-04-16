@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         session = new SessionHandler(getApplicationContext());
         setContentView(R.layout.activity_register);
 
-        etUsername = findViewById(R.id.reg_name);
+        etUsername = findViewById(R.id.reg_username);
         etPassword = findViewById(R.id.reg_password);
         etConfirmPassword = findViewById(R.id.reg_con_password);
         etFullName = findViewById(R.id.reg_name);

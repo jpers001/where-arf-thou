@@ -20,6 +20,8 @@ import org.json.JSONObject;
 import helper.MySingleton;
 import helper.SessionHandler;
 
+
+
 public class LoginActivity extends AppCompatActivity {
     private static final String KEY_STATUS = "status";
     private static final String KEY_MESSAGE = "message";
@@ -32,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private String username;
     private String password;
     private ProgressDialog pDialog;
-    private String login_url = "http://wherearfthou.duckdns.org/wherearf/tLogin.php/";
+    private String login_url = "http://wherearfthou.duckdns.org/wherearf/tLogin.php";
     private SessionHandler session;
 
     @Override
