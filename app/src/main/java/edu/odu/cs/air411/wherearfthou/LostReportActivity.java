@@ -197,6 +197,16 @@ public class LostReportActivity extends AppCompatActivity {
          contactEditText = findViewById(R.id.editText3);
         String contact = contactEditText.getText().toString();
 
+        String tags = "";
+        for(int i = 0; i < tagData.size(); i++){
+            if(i == tagData.size() - 1){
+                tags += tagData.get(i);
+            }
+            else{
+                tags += tagData.get(i) + ", ";
+            }
+        }
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         last_seen = simpleDateFormat.format(new Date());
 
@@ -230,7 +240,7 @@ public class LostReportActivity extends AppCompatActivity {
         params.put("description", description);
         params.put("photo", encoded);
         params.put("location", location);
-        //TODO: Add tags to DB
+        params.put("tag", tags);
         // Call api to create report
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_REPORT,params,CODE_POST_REQUEST);
         request.execute();
