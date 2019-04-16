@@ -36,23 +36,35 @@ public class RegisterActivity extends AppCompatActivity {
     private String confirmPassword;
     private String fullName;
     private ProgressDialog pDialog;
-    private String register_url = "http://wherearfthou.duckdns.org/wherearf/tRegister.php";
+    private String register_url = "http://wherearfthou.duckdns.org/wherearf/tRegister.php/";
     private SessionHandler session;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
         super.onCreate(savedInstanceState);
         session = new SessionHandler(getApplicationContext());
         setContentView(R.layout.activity_register);
 
-        etUsername = findViewById(R.id.reg_username);
+        etUsername = findViewById(R.id.reg_name);
         etPassword = findViewById(R.id.reg_password);
         etConfirmPassword = findViewById(R.id.reg_con_password);
         etFullName = findViewById(R.id.reg_name);
 
         Button login = findViewById(R.id.btnRegisterLogin);
         Button register = findViewById(R.id.register_button);
+
+        Button skipBtn = findViewById(R.id.skipBtn);
+        skipBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoMain = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(gotoMain);
+            }
+        });
 
         //Launch Login screen when Login Button is clicked
         login.setOnClickListener(new View.OnClickListener() {
@@ -76,15 +88,6 @@ public class RegisterActivity extends AppCompatActivity {
                     registerUser();
                 }
 
-            }
-        });
-
-        Button skipBtn = findViewById(R.id.skipBtn);
-        skipBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent goToMain = new Intent(RegisterActivity.this, MainActivity.class);
-                startActivity(goToMain);
             }
         });
 

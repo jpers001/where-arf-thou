@@ -32,12 +32,11 @@ public class LoginActivity extends AppCompatActivity {
     private String username;
     private String password;
     private ProgressDialog pDialog;
-    private String login_url = "http://wherearfthou.duckdns.org/wherearf/tLogin.php";
+    private String login_url = "http://wherearfthou.duckdns.org/wherearf/tLogin.php/";
     private SessionHandler session;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         session = new SessionHandler(getApplicationContext());
 
@@ -73,9 +72,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
 
     /**

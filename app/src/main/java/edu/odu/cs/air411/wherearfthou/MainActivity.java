@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import helper.SessionHandler;
 import helper.User;
@@ -29,20 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
         session = new SessionHandler(getApplicationContext());
         User user = session.getUserDetails();
-
-        Toast toast = Toast.makeText(getApplicationContext(),"Welcome "+user.getFullName()+", your session will expire on "+user.getSessionExpiryDate(),Toast.LENGTH_LONG);
-        toast.show();
-
-        logoutBtn = findViewById(R.id.logoutBtn);
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                session.logoutUser();
-                Intent i =new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
 
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener()
