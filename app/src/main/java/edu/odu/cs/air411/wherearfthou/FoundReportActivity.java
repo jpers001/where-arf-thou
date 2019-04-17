@@ -172,7 +172,7 @@ public class FoundReportActivity extends AppCompatActivity {
             // new bytearray
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             // compress bitmap into bytearray
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 25, byteArrayOutputStream);
             // creating bytearray
             byte[] byteArray = byteArrayOutputStream.toByteArray();
             // encode bytearray into base64
