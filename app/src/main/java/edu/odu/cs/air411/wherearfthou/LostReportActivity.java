@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONException;
@@ -37,8 +36,12 @@ import java.util.Locale;
 
 import helper.Api;
 import helper.RequestHandler;
+import helper.SessionHandler;
+import helper.User;
 
 public class LostReportActivity extends AppCompatActivity {
+
+    private SessionHandler session;
 
     public static final int PICK_MAP_POINT_REQUEST = 814;
     /**
@@ -49,6 +52,9 @@ public class LostReportActivity extends AppCompatActivity {
      *   defaultOwner: I assume the Owner of the pet will be the user? I have hardcoded the name for now.
      */
     EditText nameEditText, descriptEditText2, lastSeenEditText, contactEditText, locationEditText, tagEditTextLost;
+
+
+
     String defaultOwner = "WhereArfThou"; //should be userName later.
     String defaultLocation = "N/A";
     String encoded = "N/A";
@@ -69,6 +75,9 @@ public class LostReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lost_report);
+
+
+
 
         Button submitBtn2 = findViewById(R.id.submitBtn2);
         submitBtn2.setOnClickListener(new View.OnClickListener() {
@@ -182,6 +191,11 @@ public class LostReportActivity extends AppCompatActivity {
     public void submitForm(ArrayList<ReportData> report){
         Intent submit = new Intent(LostReportActivity.this, ReportConfirmationActivity.class);
 
+        //db: owner
+        //getting session userName
+        session = new SessionHandler(getApplicationContext());
+        User user = session.getUserDetails();
+        defaultOwner = user.getUsername();
         //db: pet_name
          nameEditText = findViewById(R.id.editText);
         String name = nameEditText.getText().toString();
