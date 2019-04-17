@@ -78,8 +78,8 @@
             android:layout_below="@id/password"
             android:layout_marginTop="35dp"
             android:background="@drawable/button_color"
+            android:textColor="@android:color/white"
             android:text="@string/login_bn_label"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textStyle="bold"
 
             />
