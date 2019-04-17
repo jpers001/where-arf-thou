@@ -168,6 +168,7 @@ public class FoundReportActivity extends AppCompatActivity {
             String filePath = TakePhotoActivity.photoFile.getAbsolutePath();
             // create bitmap of photofile
             bitmap = BitmapFactory.decodeFile(filePath);
+            bitmap = Bitmap.createScaledBitmap(bitmap, 600, 600, true);
             // new bytearray
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             // compress bitmap into bytearray
