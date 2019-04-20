@@ -60,5 +60,6 @@
     <string name="onClick">onClick</string>
     <string name="lastSeenLostReport">Last seen location for the Lost Report</string>
     <string name="edit_tag_hint">Tap to enter a tag...</string>
+    <string name="agree_terms_privacy">By continuing, you agree to our &lt;a href=https://sites.wp.odu.edu/irresistibleodupwd/legal-terms-and-conditions>Terms of Use&lt;/a> and read the &lt;a href=https://sites.wp.odu.edu/irresistibleodupwd/legal-privacy-policy>Privacy Policy&lt;/a></string>
 
 </resources>
