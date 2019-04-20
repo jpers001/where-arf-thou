@@ -110,6 +110,8 @@
             android:textSize="18dp"
             android:gravity="center"
             android:layout_alignParentBottom="true"
+            android:background="@drawable/button_color"
+            android:textColor="@android:color/white"
             android:id="@+id/sign_up"
             android:clickable="true" />
 
