@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -258,6 +260,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.83"
         app:srcCompat="@drawable/tag_icon" />
+
+        <android.support.design.chip.ChipGroup
+            android:id="@+id/tagChipGroup"
+            android:layout_width="379dp"
+            android:layout_height="73dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/submitBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tagEditTextFound">
+
+            <!-- Chips can be placed within here -->
+
+        </android.support.design.chip.ChipGroup>
+
+        <!-- Saving this for later -->
+        <!--<android.support.design.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipText="hello"
+            tools:layout_editor_absoluteX="30dp"
+            tools:layout_editor_absoluteY="297dp" />-->
 
 </android.support.constraint.ConstraintLayout>
 </ScrollView>
