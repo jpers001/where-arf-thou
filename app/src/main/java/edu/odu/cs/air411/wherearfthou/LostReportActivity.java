@@ -205,7 +205,7 @@ public class LostReportActivity extends AppCompatActivity {
         String description = descriptEditText2.getText().toString();
 
         //db: location
-         lastSeenEditText = findViewById(R.id.editText2);
+         lastSeenEditText = findViewById(R.id.lastSeenLostReport);
         String location = lastSeenEditText.getText().toString();
 
         //db: contact
