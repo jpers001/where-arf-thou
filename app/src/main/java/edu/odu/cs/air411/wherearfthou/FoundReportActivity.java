@@ -9,9 +9,13 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.chip.Chip;
+import android.support.design.chip.ChipDrawable;
+import android.support.design.chip.ChipGroup;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -89,6 +93,8 @@ public class FoundReportActivity extends AppCompatActivity {
             }
         });
 
+        //Chip Group
+        final ChipGroup chipGroup = findViewById(R.id.tagChipGroup);
         //Add tag button
         ImageButton tagImgBtn = findViewById(R.id.tagImgBtn);
         tagEditTextFound = findViewById(R.id.tagEditTextFound);
@@ -103,6 +109,15 @@ public class FoundReportActivity extends AppCompatActivity {
                 else if(tagEditTextFound.getText().toString().length() >= 3)
                 {
                     tagData.add(tagEditTextFound.getText().toString());
+                    final Chip chip = getChip(chipGroup, tagEditTextFound.getText().toString());
+                    chipGroup.addView(chip);
+                    chip.setOnCloseIconClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            chipGroup.removeView(chip);
+                            tagData.remove(chip.getText());
+                        }
+                    });
                     tagEditTextFound.setText("");
                 }
                 else if(tagEditTextFound.getText().toString().length() <= 3){
@@ -189,6 +204,18 @@ public class FoundReportActivity extends AppCompatActivity {
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }*/
+
+    private Chip getChip(final ChipGroup chipGroup, String text) {
+        final Chip chip = new Chip(this);
+        chip.setChipDrawable(ChipDrawable.createFromResource(this, R.xml.tag_chip));
+        int paddingDp = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 10,
+                getResources().getDisplayMetrics()
+        );
+        chip.setPadding(paddingDp, paddingDp, paddingDp, paddingDp);
+        chip.setText(text);
+        return chip;
+    }
 
     public void submitForm(ArrayList<ReportData> report){
         Intent submit = new Intent(FoundReportActivity.this, ReportConfirmationActivity.class);
