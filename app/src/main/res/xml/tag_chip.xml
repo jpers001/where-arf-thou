@@ -4,4 +4,5 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:checkable="false"
+    app:chipBackgroundColor="@color/colorAccent"
     app:iconStartPadding="5dp"/>

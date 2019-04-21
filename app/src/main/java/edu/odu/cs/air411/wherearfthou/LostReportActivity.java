@@ -212,6 +212,7 @@ public class LostReportActivity extends AppCompatActivity {
         );
         chip.setPadding(paddingDp, paddingDp, paddingDp, paddingDp);
         chip.setText(text);
+        chip.setTextAppearanceResource(R.style.ChipTextStyle);
         return chip;
     }
 
