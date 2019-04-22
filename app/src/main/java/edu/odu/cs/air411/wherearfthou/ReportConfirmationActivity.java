@@ -17,6 +17,7 @@ public class ReportConfirmationActivity extends AppCompatActivity {
     private TextView descriptTextView;
     private TextView locationTextView;
     private TextView contactTextView;
+    private TextView tagTextView;
     private String type;
 
     @Override
@@ -68,5 +69,8 @@ public class ReportConfirmationActivity extends AppCompatActivity {
 
         contactTextView = findViewById(R.id.contactTextView);
         contactTextView.setText("Contact Info: " + entry.getContact());
+
+        tagTextView = findViewById(R.id.tagTextView);
+        tagTextView.setText("Tags: " + entry.getTagString());
     }
 }

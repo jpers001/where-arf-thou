@@ -14,8 +14,8 @@ public class ReportData implements Serializable {
     private String contact;
     private String reportDate;
     private ArrayList<String> tags = new ArrayList<>();
-    // true = found report, false = lost report
-    private boolean isFound;
+    private String tagString;
+    private boolean isFound; // true = found report, false = lost report
     private String photoUri;
 
 
@@ -69,6 +69,14 @@ public class ReportData implements Serializable {
 
     public void setFound(boolean found) {
         isFound = found;
+    }
+
+    public String getTagString() {
+        return tagString;
+    }
+
+    public void setTagString(String tagString) {
+        this.tagString = tagString;
     }
 
     ///Constructors

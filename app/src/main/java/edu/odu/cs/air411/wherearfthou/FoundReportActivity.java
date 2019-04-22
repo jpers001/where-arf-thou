@@ -264,6 +264,7 @@ public class FoundReportActivity extends AppCompatActivity {
          * -> It's used for the confirmation page
          */
         ReportData entry = new ReportData(description, location, contact, true, tagData);
+        entry.setTagString(tags);
         entry.setPhotoUri(TakePhotoActivity.imageFilePath);
         report.add(entry);
 

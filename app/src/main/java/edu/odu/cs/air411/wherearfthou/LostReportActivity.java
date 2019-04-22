@@ -262,6 +262,7 @@ public class LostReportActivity extends AppCompatActivity {
          * -> It's used for the confirmation page
          */
         ReportData entry = new ReportData(name, description, location, contact, false, tagData);
+        entry.setTagString(tags);
         entry.setPhotoUri(TakePhotoActivity.imageFilePath);
         report.add(entry);
 
