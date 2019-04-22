@@ -90,8 +90,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             //Code if location permissions aren't granted (yet?):
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, MY_REQUEST_INT);
+                mMap.getUiSettings().setZoomControlsEnabled(true);
+                mMap.setMinZoomPreference(16);
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(lostPetMarker));
+
             }
-            return;
+            //return;
         } else {
             //Code if permission is granted:
             //Location currentLocation = LocationServices.FusedLocationApi.getLastLocation;
@@ -99,6 +103,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
             Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+            mMap.getUiSettings().setZoomControlsEnabled(true);
+            mMap.setMinZoomPreference(16);
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(lostPetMarker));
+
         }
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
