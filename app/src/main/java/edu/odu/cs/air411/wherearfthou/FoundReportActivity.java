@@ -71,7 +71,6 @@ public class FoundReportActivity extends AppCompatActivity {
     public ArrayList<String> tagData = new ArrayList<>();
     public Bitmap bitmap;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +81,7 @@ public class FoundReportActivity extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitForm(report);
+                    submitForm(report);
             }
         });
 
@@ -251,15 +250,19 @@ public class FoundReportActivity extends AppCompatActivity {
         String contact = contactEditText.getText().toString();
 
         String tags = "";
-        for(int i = 0; i < tagData.size(); i++){
-            if(i == tagData.size() - 1){
-                tags += tagData.get(i);
-            }
-            else{
-                tags += tagData.get(i) + ", ";
+        if(tagData.isEmpty()){
+            tags = "None";
+        }
+        else{
+            for(int i = 0; i < tagData.size(); i++){
+                if(i == tagData.size() - 1){
+                    tags += tagData.get(i);
+                }
+                else{
+                    tags += tagData.get(i) + ", ";
+                }
             }
         }
-
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
          last_seen = simpleDateFormat.format(new Date());

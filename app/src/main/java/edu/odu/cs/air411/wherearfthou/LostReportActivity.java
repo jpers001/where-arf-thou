@@ -90,7 +90,7 @@ public class LostReportActivity extends AppCompatActivity {
         submitBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitForm(report);
+                    submitForm(report);
             }
         });
 
@@ -258,12 +258,17 @@ public class LostReportActivity extends AppCompatActivity {
         String contact = contactEditText.getText().toString();
 
         String tags = "";
-        for(int i = 0; i < tagData.size(); i++){
-            if(i == tagData.size() - 1){
-                tags += tagData.get(i);
-            }
-            else{
-                tags += tagData.get(i) + ", ";
+        if(tagData.isEmpty()){
+            tags = "None";
+        }
+        else{
+            for(int i = 0; i < tagData.size(); i++){
+                if(i == tagData.size() - 1){
+                    tags += tagData.get(i);
+                }
+                else{
+                    tags += tagData.get(i) + ", ";
+                }
             }
         }
 
