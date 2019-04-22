@@ -3,154 +3,143 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="edu.odu.cs.air411.wherearfthou.RegisterActivity">
-
-
-    <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:layout_marginTop="30dp"
-        android:textStyle="bold"
-        />
+        android:orientation="vertical"
+        tools:context="edu.odu.cs.air411.wherearfthou.RegisterActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/prompt_name"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="18dp"
-            android:id="@+id/tx1"
-            android:layout_alignParentLeft="true"
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tx1"
-            android:id="@+id/reg_name"
-            android:inputType="textPersonName"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/prompt_username"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="18dp"
-            android:id="@+id/tx2"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/reg_name"
-            android:layout_marginTop="10dp"
-            />
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-        <EditText
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tx2"
-            android:id="@+id/reg_username"
-            android:inputType="text"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            />
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="25dp">
+
+            <TextView
+                android:id="@+id/tx1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/prompt_name"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/reg_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tx1"
+                android:inputType="textPersonName"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+            <TextView
+                android:id="@+id/tx2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reg_name"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/prompt_username"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/reg_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tx2"
+                android:inputType="text"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+            <TextView
+                android:id="@+id/tx3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reg_username"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/prompt_password"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/reg_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tx3"
+                android:inputType="textPassword"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+            <TextView
+                android:id="@+id/tx4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reg_password"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/prompt_con_password"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/reg_con_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tx4"
+                android:inputType="textPassword"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+            <Button
+                android:id="@+id/register_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reg_con_password"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/button_color"
+                android:text="@string/register_bn_label"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+
+                />
+
+
+        </RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/prompt_password"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="18dp"
-            android:id="@+id/tx3"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/reg_username"
-            android:layout_marginTop="10dp"
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tx3"
-            android:id="@+id/reg_password"
-            android:inputType="textPassword"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/prompt_con_password"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="18dp"
-            android:id="@+id/tx4"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/reg_password"
-            android:layout_marginTop="10dp"
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tx4"
-            android:id="@+id/reg_con_password"
-            android:inputType="textPassword"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            />
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Already have an account?"
+            android:textColor="@android:color/darker_gray" />
 
         <Button
-            android:id="@+id/register_button"
-            style="?android:textAppearanceSmall"
+            android:id="@+id/btnRegisterLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/reg_con_password"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/button_color"
-            android:text="@string/register_bn_label"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-
-            />
+            android:text="Login"
+            android:textColor="@android:color/white" />
 
 
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/skipBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SKIP" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="Already have an account?"
-        android:textColor="@android:color/darker_gray" />
-    <Button
-        android:id="@+id/btnRegisterLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="Login"
-        android:background="@drawable/button_color"
-        android:textColor="@android:color/white" />
-
-
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>

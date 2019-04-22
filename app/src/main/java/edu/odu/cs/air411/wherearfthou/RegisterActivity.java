@@ -46,14 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        ActionBar actionBar = getSupportActionBar(); // or getActionBar();
-        String title = actionBar.getTitle().toString(); // get the title
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.ic_wat_icon);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-
-
         super.onCreate(savedInstanceState);
         session = new SessionHandler(getApplicationContext());
         setContentView(R.layout.activity_register);
@@ -65,15 +57,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         Button login = findViewById(R.id.btnRegisterLogin);
         Button register = findViewById(R.id.register_button);
-
-        Button skipBtn = findViewById(R.id.skipBtn);
-        skipBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent gotoMain = new Intent(RegisterActivity.this, MainActivity.class);
-                startActivity(gotoMain);
-            }
-        });
 
         //Launch Login screen when Login Button is clicked
         login.setOnClickListener(new View.OnClickListener() {
@@ -100,8 +83,11 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-
-
+        ActionBar actionBar = getSupportActionBar(); // or getActionBar();
+        String title = actionBar.getTitle().toString(); // get the title
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_wat_icon);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
     }
 
     /**
