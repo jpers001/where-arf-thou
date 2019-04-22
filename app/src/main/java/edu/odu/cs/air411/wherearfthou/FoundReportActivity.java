@@ -17,7 +17,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -99,7 +101,7 @@ public class FoundReportActivity extends AppCompatActivity {
         //Chip Group
         final ChipGroup chipGroup = findViewById(R.id.tagChipGroup);
         //Add tag button
-        ImageButton tagImgBtn = findViewById(R.id.tagImgBtn);
+        final ImageButton tagImgBtn = findViewById(R.id.tagImgBtn);
         tagEditTextFound = findViewById(R.id.tagEditTextFound);
         tagImgBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -127,6 +129,18 @@ public class FoundReportActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(),"Tags must be at least 3 characters.",Toast.LENGTH_SHORT);
                     toast.show();
                 }
+            }
+        });
+
+        tagEditTextFound.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    tagImgBtn.performClick();
+                    handled = true;
+                }
+                return handled;
             }
         });
 

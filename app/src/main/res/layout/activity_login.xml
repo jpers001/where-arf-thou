@@ -66,6 +66,7 @@
             android:id="@+id/password"
             android:inputType="textPassword"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:imeOptions="actionGo"
             />
 
         <Button

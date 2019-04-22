@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -62,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.password);
 
         Button register = findViewById(R.id.sign_up);
-        Button login = findViewById(R.id.login_button);
+        final Button login = findViewById(R.id.login_button);
 
         //Launch Registration screen when Register Button is clicked
         register.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +85,18 @@ public class LoginActivity extends AppCompatActivity {
                 if (validateInputs()) {
                     login();
                 }
+            }
+        });
+
+        etPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_GO) {
+                    login.performClick();
+                    handled = true;
+                }
+                return handled;
             }
         });
 
