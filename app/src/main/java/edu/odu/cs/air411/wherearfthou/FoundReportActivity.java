@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipDrawable;
 import android.support.design.chip.ChipGroup;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -84,8 +85,10 @@ public class FoundReportActivity extends AppCompatActivity {
         });
 
         //Photo Button
-        ImageButton addPhotoImgBtn = findViewById(R.id.addPhotoImgBtn);
-        addPhotoImgBtn.setOnClickListener(new View.OnClickListener(){
+        FloatingActionButton addPhotoFAB = findViewById(R.id.addPhotoFAB2);
+        //Replacing with FAB
+        //ImageButton addPhotoImgBtn = findViewById(R.id.addPhotoImgBtn);
+        addPhotoFAB.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent openTakePhotoActivity = new Intent(FoundReportActivity.this, TakePhotoActivity.class);
