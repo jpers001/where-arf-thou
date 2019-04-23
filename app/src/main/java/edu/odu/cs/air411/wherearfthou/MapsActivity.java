@@ -31,6 +31,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -110,6 +111,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(true);
         mMap.setMinZoomPreference(16);
         //mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
@@ -125,9 +127,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public boolean onMarkerClick(Marker marker) {
                 ///TODO: A proper method of zooming, currently it's a rough implementation and doesn't work if the
                 ///TODO: user zooms in, or if the info window is very tall (or very short)
-
+                mMap.getUiSettings().setMapToolbarEnabled(true);
                 final LatLng newLatLng = new LatLng(marker.getPosition().latitude + .004, marker.getPosition().longitude);
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(newLatLng));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(newLatLng, 16.0f));
                 marker.showInfoWindow();
                 return true;
             }
