@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private String register_url = "http://wherearfthou.duckdns.org/wherearf/tRegister.php/";
     private SessionHandler session;
+    private CheckBox termsOfUseCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,14 @@ public class RegisterActivity extends AppCompatActivity {
 
         final Button login = findViewById(R.id.btnRegisterLogin);
         final Button register = findViewById(R.id.register_button);
+
+        /**
+         *  Create hyperlink to terms and conditions
+         */
+        Spanned policy = Html.fromHtml(getString(R.string.agree_terms_privacy));
+        termsOfUseCheckBox = findViewById(R.id.termsOfUseCheckBox);
+        termsOfUseCheckBox.setText(policy);
+        termsOfUseCheckBox.setMovementMethod(LinkMovementMethod.getInstance());
 
         //Launch Login screen when Login Button is clicked
         login.setOnClickListener(new View.OnClickListener() {
@@ -211,6 +221,12 @@ public class RegisterActivity extends AppCompatActivity {
         if (!password.equals(confirmPassword)) {
             etConfirmPassword.setError("Password and Confirm Password does not match");
             etConfirmPassword.requestFocus();
+            return false;
+        }
+
+        if(!termsOfUseCheckBox.isChecked()){
+            termsOfUseCheckBox.setError("You must agree to the terms of use and privacy policy before proceeding");
+            termsOfUseCheckBox.requestFocus();
             return false;
         }
 

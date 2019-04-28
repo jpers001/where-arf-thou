@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -99,15 +96,6 @@ public class LoginActivity extends AppCompatActivity {
                 return handled;
             }
         });
-
-
-        /**
-         *  Create hyperlink to terms and conditions
-         */
-        Spanned policy = Html.fromHtml(getString(R.string.agree_terms_privacy));
-        TextView termsOfUse = (TextView)findViewById(R.id.termsOfUse);
-        termsOfUse.setText(policy);
-        termsOfUse.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     /**

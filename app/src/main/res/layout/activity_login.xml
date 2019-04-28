@@ -107,7 +107,11 @@
             android:id="@+id/sign_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
             android:layout_marginBottom="48dp"
             android:background="@drawable/button_color"
             android:clickable="true"
@@ -128,15 +132,6 @@
             app:srcCompat="@drawable/waticon" />
 
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/termsOfUse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:text="@string/agree_terms_privacy"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="10dp" />
 
 </LinearLayout>
 </ScrollView>
